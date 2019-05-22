@@ -1,0 +1,7 @@
+vendor/
+.php_cs.cache
+*zip
+
+.vs/
+
+ausleihverwaltung/

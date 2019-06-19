@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_12q03ll" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+  <bpmn:process id="Request_Approval_1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="stdnt_name" label="Name" type="string" />
+          <camunda:formField id="stdnt_matr" label="Matrikelnummer" type="string" />
+          <camunda:formField id="stdnt_length" label="Mietdauer" type="string" />
+          <camunda:formField id="stdnt_resource" label="Resource" type="string" />
+          <camunda:formField id="stdnt_quantity" label="Anzahl" type="long" />
+          <camunda:formField id="stdnt_mail" label="Email" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0sqs4j5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="DHBW_Approval" name="Approve Request">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Approval" label="Ausleihe bestätigen" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0sqs4j5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1h5p4n9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0sqs4j5" sourceRef="StartEvent_1" targetRef="DHBW_Approval" />
+    <bpmn:endEvent id="DHBW_Approved">
+      <bpmn:incoming>SequenceFlow_1h5p4n9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1h5p4n9" sourceRef="DHBW_Approval" targetRef="DHBW_Approved" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Request_Approval_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1dc1v0d_di" bpmnElement="DHBW_Approval">
+        <dc:Bounds x="305" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0sqs4j5_di" bpmnElement="SequenceFlow_0sqs4j5">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="305" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_05m8k05_di" bpmnElement="DHBW_Approved">
+        <dc:Bounds x="512" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1h5p4n9_di" bpmnElement="SequenceFlow_1h5p4n9">
+        <di:waypoint x="405" y="120" />
+        <di:waypoint x="512" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

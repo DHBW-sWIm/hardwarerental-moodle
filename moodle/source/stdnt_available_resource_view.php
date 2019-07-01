@@ -103,13 +103,18 @@ if ($mform->is_cancelled()) {
 echo '<br>';
 
 $table = new html_table();
-$table->head = array('ID', 'Name', 'Description', 'Status', 'Quantity', 'Select');
+$table->head = array('Name', 'Description', 'Status', 'Quantity', 'Select');
 
 
-foreach($SESSION->resourceList as $item) {
-    if ('Available' == $item->status || 'Requested' == $item->status) {
-        $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $item->id)), 'Select', $attributes=null);
-        $table->data[] = array($item->id, $item->name, $item->description, $item->status, $item->quantity, $htmlLink);
+foreach($SESSION->resourceList as $resource) {
+    if ('Available' == $resource->status || 'Requested' == $resource->status) {
+        if($resource->resourcetype == 'Bulk Material'){
+            $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_available_resourceBulk_detail_view.php', array('id' => $cm->id, 'resourceName' => $resource->name)), 'Select', $attributes=null);
+
+        } else {
+            $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
+        }
+        $table->data[] = array($resource->name, $resource->description, $resource->status, $resource->quantity, $htmlLink);
     }
 }
 

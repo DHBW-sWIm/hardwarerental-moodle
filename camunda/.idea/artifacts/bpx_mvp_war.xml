@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="bpx-mvp.war">
+    <root id="archive" name="bpx-integration.war">
       <element id="artifact" artifact-name="bpx-mvp:war exploded" />
     </root>
   </artifact>

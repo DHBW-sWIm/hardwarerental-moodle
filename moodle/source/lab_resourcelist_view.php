@@ -85,16 +85,22 @@ echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_new_resourc
 echo '<br>';
 
 $table = new html_table();
-$table->head = array('ID', 'Name', 'Description', 'Comment', 'Status', 'Quantity', 'Details');
+$table->head = array('Name', 'Description', 'Comment', 'Status', 'Quantity', 'Details');
 
-$resources = $SESSION->resourceList;
-if(count($resources)<1 && $resources !== NULL){
-    $SESSION->resourceList[] = (object) array('name' => 'Samsung Galaxy A5', 'comment' => 'Small scratches', 'description' => 'Galaxy A5 (2016)', 'category' => 'Smartphone', 'resourcetype' => 'Piece Material', 'quantity' => '1', 'id' => '1234', 'serial' => '1234', 'equipment' => '4GB RAM', 'status' => 'Available');
+
+$resources = $SESSION->resourceList ? $SESSION->resourceList : [];
+if(count($resources)<1 || $resources === NULL){
+    $SESSION->resourceList[] = (object) array('name' => 'Samsung Galaxy A5', 'comment' => 'Small scratches', 'description' => 'Galaxy A5 (2016)', 'category' => 'Smartphone', 'type' => 'Samsung', 'resourcetype' => 'Piece Material', 'quantity' => '1', 'id' => '1234', 'serial' => '1234', 'equipment' => '4GB RAM', 'status' => 'Available');
 }
 
 foreach ($SESSION->resourceList as $resource){
-    $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/lab_resourcedetail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Details', $attributes=null);
-    $table->data[] = array($resource->id, $resource->name, $resource->description, $resource->comment, $resource->status, $resource->quantity, $htmlLink);
+    if($resource->resourcetype == 'Bulk Material'){
+        $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/lab_resourcedetail_bulk_view.php', array('id' => $cm->id, 'resourceName' => $resource->name)), 'Details', $attributes=null);
+
+    } else {
+        $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/lab_resourcedetail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Details', $attributes=null);
+    }
+    $table->data[] = array($resource->name, $resource->description, $resource->comment, $resource->status, $resource->quantity, $htmlLink);
 }
 
 echo html_writer::table($table);

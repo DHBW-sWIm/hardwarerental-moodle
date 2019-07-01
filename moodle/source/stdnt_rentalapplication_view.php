@@ -36,6 +36,20 @@ global $SESSION;
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... ausleihantrag instance ID - it should be named as the first character of the module.
 $resourceid = optional_param('resourceid', 0, PARAM_INT);
+$resourceName = optional_param('resourceName', 0, PARAM_NOTAGS);
+if(!$resourceName){
+    foreach($SESSION->resourceList as $item) {
+        if($item->id){
+            echo $item->id;
+            echo $resourceid;
+            if ($resourceid == $item->id) {
+                $resourceName = $item->name;
+                break;
+            }
+        }
+    }
+}
+
 
 if ($id) {
     $cm           = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
@@ -91,7 +105,7 @@ if ($mform->is_cancelled()) {
     //Handle form successful operation, if button is present on form
     $resource = new stdClass();
     foreach($SESSION->resourceList as $item) {
-        if ($fromform->resourceid == $item->id) {
+        if ($fromform->resourceName == $item->name) {
             $resource = $item;
             break;
         }
@@ -99,7 +113,7 @@ if ($mform->is_cancelled()) {
     $appId = rand(1,10000);
     $responsibles = array('Prof. Martin', 'Prof. Koslowski', 'Gzuz', 'Tichy');
     $responsible = $responsibles[$fromform->assignee];
-    $SESSION->applicationList[] = (object) array('id' => $appId, 'ausleiher' => $fromform->ausleiher, 'matrikel' => $fromform->matrikel, 'mail' => $fromform->mail, 'resource' => $resource->name, 'resourceid' => $resource->id, 'amount' => $resource->quantity, 'grund' => $fromform->grund, 'returndate' => $fromform->returnDate, 'anmerkung' => $fromform->anmerkung, 'assignee' => $responsible, 'applicationtype' => 'Rental Application', 'status' => 'Requested');
+    $SESSION->applicationList[] = (object) array('id' => $appId, 'ausleiher' => $fromform->ausleiher, 'matrikel' => $fromform->matrikel, 'mail' => $fromform->mail, 'resource' => $resource->name, 'grund' => $fromform->grund, 'returndate' => $fromform->returnDate, 'anmerkung' => $fromform->anmerkung, 'assignee' => $responsible, 'applicationtype' => 'Rental Application', 'status' => 'Requested');
 
     // redirect(new moodle_url('../ausleihverwaltung/stdnt_applicationlist_view.php', array('id' => $cm->id)));
 
@@ -124,8 +138,10 @@ if ($mform->is_cancelled()) {
                 'stdnt_matr' => new camunda_var($fromform->matrikel, 'string'),
                 'stdnt_length' => new camunda_var($fromform->returnDate, 'string'),
                 'stdnt_resource' => new camunda_var($resource->name, 'string'),
-                'stdnt_quantity' => new camunda_var($resource->quantity, 'long'),
+                'stdnt_reason' => new camunda_var($fromform->grund, 'string'),
+                'stdnt_comment' => new camunda_var($fromform->anmerkung, 'string'),
                 'stdnt_mail' => new camunda_var($fromform->mail, 'string'),
+                'application_date' => new camunda_var(time(), 'string'),
             ]
             ]
         ]
@@ -141,7 +157,8 @@ if ($mform->is_cancelled()) {
     // or on the first display of the form.
     // Set default data (if any)
     // Required for module not to crash as a course id is always needed
-    $formdata = array('id' => $id, 'resourceid' => $resourceid);
+
+    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'resourceName' => $resourceName);
     $mform->set_data($formdata);
     //displays the form
     $mform->display();

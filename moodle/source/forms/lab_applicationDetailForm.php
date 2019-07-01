@@ -25,11 +25,6 @@ class labApplicationDetailForm extends moodleform {
         $mform->addElement('static', 'email', 'Email:');
         $mform->setType('email', PARAM_NOTAGS);
 
-        /* ****************** TYPE *************/
-        $mform->addElement('static', 'status', 'Status:');
-        $mform->setType('status', PARAM_NOTAGS);
-        $mform->setDefault('status', 'Angefragt');
-
         /* ****************** STATUS *************/
         $mform->addElement('static', 'resource', 'Ressource:');
         $mform->setType('resource', PARAM_NOTAGS);
@@ -40,14 +35,18 @@ class labApplicationDetailForm extends moodleform {
         $mform->setDefault('date', '21.05.2019');
 
         /* ****************** QUANTITY *************/
-        $mform->addElement('static', 'quantity', 'Anzahl');
-        $mform->setType('quantity', PARAM_INT);
-        $mform->setDefault('quantity', '1');
+        $mform->addElement('static', 'reason', 'Ausleihgrund:');
+        $mform->setType('reason', PARAM_NOTAGS);
+        $mform->setDefault('reason', '-');
+
+        $mform->addElement('static', 'comment', 'Anmerkung:');
+        $mform->setType('comment', PARAM_NOTAGS);
+        $mform->setDefault('comment', '-');
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'taskid', 'Task ID:');
+        $mform->addElement('hidden', 'taskid');
         $mform->setType('taskid', PARAM_INT);
 
         $mform->addElement('submit', 'btnSubmit', 'Akzeptieren');

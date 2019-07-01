@@ -80,8 +80,8 @@ echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-require_once(__DIR__ . '/forms/availableResourceForm.php');
-$mform = new availableResourceForm();
+require_once(__DIR__ . '/forms/stdnt_availableResourceForm.php');
+$mform = new stdntAvailableResourceForm();
 $mform->render();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {

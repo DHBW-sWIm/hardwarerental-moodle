@@ -41,6 +41,9 @@ class stdntAntragForm extends moodleform {
         $mform->addElement('hidden', 'resourceid');
         $mform->setType('resourceid', PARAM_INT);
 
+        $mform->addElement('hidden', 'resourceName');
+        $mform->setType('resourceName', PARAM_NOTAGS);
+
         $mform->addElement('submit', 'btnSubmit', 'Request');
         $mform->addElement('cancel', 'cancelBtn', 'Back');
 

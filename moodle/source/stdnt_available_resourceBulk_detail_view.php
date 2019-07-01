@@ -28,11 +28,14 @@
 // Replace ausleihantrag with the name of your module and remove this line.
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(__FILE__) . '/lib.php');
-require_once(dirname(__FILE__) . '/locallib.php');
+require_once(dirname(__FILE__).'/lib.php');
+require_once(dirname(__FILE__).'/locallib.php');
+
+global $SESSION;
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... ausleihantrag instance ID - it should be named as the first character of the module.
+$resourceName = optional_param('resourceName', 0, PARAM_NOTAGS);
 
 if ($id) {
     $cm           = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
@@ -58,7 +61,7 @@ $event->trigger();
 
 // Print the page header.
 
-$PAGE->set_url('/mod/ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/ausleihverwaltung/stdnt_available_resource_detail_view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -72,63 +75,44 @@ $PAGE->set_heading(format_string($course->fullname));
 // Output starts here.
 echo $OUTPUT->header();
 
-$strName = "Vorhandene Anfragen:";
+$strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-//Get constants by using .ini
-$ini = parse_ini_file(__DIR__ . '/.ini');
-$camunda_url = $ini['camunda_url'];
-$camunda_task_api = $ini['camunda_task_api'];
-$camunda_task_variables_api = $ini['camunda_task_variables_api'];
-//$camunda_task_filter = $ini['camunda_task_filter'];
+require_once(__DIR__ . '/forms/stdnt_availableResourceBulkForm.php');
+$mform = new stdntAvailableResourceBulkForm();
+$mform->render();
+//Form processing and displaying is done here
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+    redirect(new moodle_url('../ausleihverwaltung/stdnt_available_resource_view.php', array('id' => $cm->id)));
+} else if ($fromform = $mform->get_data()) {
+    //Handle form successful operation, if button is present on form
+    echo ('Form1: '.$fromform->name);
+    echo ('Form2: '.$fromform-resourceNname);
+    echo ('Global: '.$resourceName);
+    redirect(new moodle_url('../ausleihverwaltung/stdnt_rentalapplication_view.php', array('id' => $cm->id, 'resourceName' => $fromform->resourceName)));
+} else {
+    // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+    // or on the first display of the form.
+    // Set default data (if any)
+    // Required for module not to crash as a course id is always needed
 
-//Create a client
-$client = new GuzzleHttp\Client();
-// Send a request
-$response = $client->get($camunda_url . $camunda_task_api . '?processDefinitionKey=Request_Approval_2&taskDefinitionKey=DHBW_Approval');
+    $resource = new stdClass();
+    foreach($SESSION->resourceList as $item) {
+        if ($resourceName == $item->name) {
+            $resource = $item;
+            break;
+        }
+    }
 
-$body = $response->getBody();
-$tasks = json_decode($body, true);
-
-//Tabelle mit camunda
-$table = new html_table();
-$table->head = array('Anfrage', 'Student', 'Vom', 'Gerät', '');
-//Für jeden Datensatz
-foreach ($tasks as $task) {
-    $taskId = $task['id'];
-    $name = $task['name'];
-
-    $client2 = new GuzzleHttp\Client();
-    $response2 = $client2->get($camunda_url . $camunda_task_api . '/' . $taskId . $camunda_task_variables_api);
-    $body = $response2->getBody();
-    $variables = json_decode($body, true);
-
-    $date = date("Y-m-d", $variables['application_date']['value']);
-
-    //Link zum löschen des Verantwortlichen in foreach-Schleife setzen
-    $detailButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_application_detail_view.php', array('id' => $cm->id, 'taskid' => $taskId)), 'Details', $attributes = null);
-    //Daten zuweisen an HTML-Tabelle
-    $table->data[] = array($name, $variables['stdnt_name']['value'], $date, $variables['stdnt_resource']['value'], $detailButton);
+    $formdata = array('id' => $id, 'resourceName' => $resourceName,'name' => $resource->name, 'type' => $resource->type, 'category' => $resource->category, 'description' => $resource->description, 'status' => $resource->status, 'quantity' => $resource->quantity, 'comment' => $resource->comment);
+    $mform->set_data($formdata);
+    //displays the form
+    $mform->display();
 }
-//Tabelle ausgeben
-echo html_writer::table($table);
 
-
-/*$table = new html_table();
-$table->head = array('Typ', 'Name', 'Ressource', 'Status', 'Details');
-
-$type = "Ausleihantrag";
-$resource = "iPhone 8";
-$name = "Henry Stoll";
-$status = "Angefragt";
-$htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/lab_application_detail_view.php', array('id' => $cm->id, 'resourceid' => $id)), 'Details', $attributes=null);
-
-$table->data[] = array($type, $name, $resource, $status, $htmlLink);
-
-echo html_writer::table($table);*/
-
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_lab_view.php', array('id' => $cm->id)), 'Home');
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_student_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();

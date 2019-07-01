@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="bpx-mvp:war exploded">
-    <output-path>$PROJECT_DIR$/target/bpx-mvp</output-path>
+    <output-path>$PROJECT_DIR$/target/bpx-integration</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -29,7 +29,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/bpx-mvp/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/bpx-integration/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="bpx-mvp/web/Web" />
     </root>

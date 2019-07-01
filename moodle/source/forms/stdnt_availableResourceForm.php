@@ -2,7 +2,7 @@
 //moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
-class availableResourceForm extends moodleform {
+class stdntAvailableResourceForm extends moodleform {
 
     public function definition() {
         global $CFG;

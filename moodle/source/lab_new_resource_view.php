@@ -85,7 +85,31 @@ if ($mform->is_cancelled()) {
  } else if ($fromform = $mform->get_data()) {
 
     $SESSION->formData1 = $fromform;
-    redirect(new moodle_url('../ausleihverwaltung/lab_pieceMaterial_view.php', array('id' => $cm->id)));
+    if($fromform->resourcetype == 1) {
+        $categories = array('Smartphone', 'Tablet', 'Laptop', 'Computer','Software', 'Printer');
+        $types = array('Apple', 'Samsung', 'Huawei', 'Xiaomi', 'Dell', 'Lenovo', 'Asus');
+        $material = array('Piece Material', 'Bulk Material');
+
+        $category = $categories[$fromform->category];
+        $type = $types[$fromform->type];
+        $resourcetype = $material[$fromform->resourcetype];
+
+        if(array_search($fromform->name, array_column($SESSION->resourceList, 'name')) == 1){
+            foreach($SESSION->resourceList as $resource) {
+                if ($fromform->name == $resource->name) {
+                    $resource->quantity += $fromform->quantity;
+                    $resource->available += $fromform->available;
+                    break;
+                }
+            }
+        } else {
+            $SESSION->resourceList[] = (object) array('name' => $fromform->name, 'comment' => $fromform->comment, 'description' => $fromform->description, 'category' => $category, 'resourcetype' => $resourcetype, 'type' => $type, 'quantity' => $fromform->quantity, 'available' => $fromform->quantity, 'status' => 'Available');
+        }
+
+        redirect(new moodle_url('../ausleihverwaltung/lab_resourcelist_view.php', array('id' => $cm->id)));
+    } else {
+        redirect(new moodle_url('../ausleihverwaltung/lab_pieceMaterial_view.php', array('id' => $cm->id)));
+    }
 
  
  } else {

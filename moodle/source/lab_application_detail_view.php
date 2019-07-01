@@ -82,7 +82,7 @@ $taskid = optional_param('taskid', 0, PARAM_NOTAGS); // Task ID
 // Output starts here.
 echo $OUTPUT->header();
 
-$strName = "Antragsdetails zu Antrag " . $taskid;
+$strName = "Antragsdetails";
 echo $OUTPUT->heading($strName);
 
 
@@ -137,6 +137,7 @@ if ($mform->is_cancelled()) {
 
         $body = $response->getBody();
         $variables = json_decode($body, true);
+        $return = date("Y-m-d", $variables['stdnt_length']['value']);
 
         //Set Data from variables
         $data = array(
@@ -145,9 +146,10 @@ if ($mform->is_cancelled()) {
             "name" => $variables['stdnt_name']['value'],
             "matr" => $variables['stdnt_matr']['value'],
             "email" => $variables['stdnt_mail']['value'],
-            "date" => $variables['stdnt_length']['value'],
+            "date" => $return,
             "resource" => $variables['stdnt_resource']['value'],
-            "quantity" => $variables['stdnt_quantity']['value'],
+            "reason" => $variables['stdnt_reason']['value'],
+            "comment" => $variables['stdnt_comment']['value'],
         );
     }
 

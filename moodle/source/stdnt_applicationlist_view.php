@@ -84,11 +84,11 @@ echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/stdnt_available
 echo '<br>';
 
 $table = new html_table();
-$table->head = array('Type', 'Resource', 'Status', 'Quantity', 'Details');
+$table->head = array('Type', 'Resource', 'Status', 'Details');
 
 foreach ($SESSION->applicationList as $application){
     $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_applicationdetail_view.php', array('id' => $cm->id, 'applicationid' => $application->id)), 'Details', $attributes=null);
-    $table->data[] = array($application->applicationtype, $application->resource, $application->status, $application->amount, $htmlLink);
+    $table->data[] = array($application->applicationtype, $application->resource, $application->status, $htmlLink);
 }
 
 

@@ -3,6 +3,13 @@
 require_once("$CFG->libdir/formslib.php");
 
 class labNewResourceForm extends moodleform {
+    public function __construct($categories, $manufacturers, $tags)
+    {
+        $this->categories = $categories;
+        $this->manufacturers = $manufacturers;
+        $this->tags = $tags;
+        parent::__construct();
+    }
 
     public function definition() {
         global $CFG;
@@ -13,28 +20,27 @@ class labNewResourceForm extends moodleform {
 		$mform->setType('name', PARAM_NOTAGS);
 
         //Dropwdown-Menü wird erstellt, um Hauptkategorie auszuwählen
-        $mform->addElement('select', 'category',
-            'Category:', array('Smartphone', 'Tablet', 'Laptop', 'Computer','Software', 'Printer'));
-
-        $mform->addElement('button', 'btn1', 'Add Category');
-
+        $mform->addElement('autocomplete', 'category', 'Category',
+            $this->categories,
+            array('tags'=>true)
+        );
         //Radiobuton um Stückgut oder Schüttgut auszuwählen
+
         $mform->addElement('select', 'resourcetype',
             'Type:', array('Piece Material', 'Bulk Material'));
 
-        $mform->addElement('select', 'type',
-            'Manufacturer:', array('Apple', 'Samsung', 'Huawei', 'Xiaomi', 'Dell', 'Lenovo', 'Asus'));
+        $mform->addElement('autocomplete', 'manufacturer', 'Manufacturer',
+            $this->manufacturers,
+            array('tags' => true)
+        );
 
-        $mform->addElement('button', 'btn2', 'New Manufacturer');
+        $mform->addElement('autocomplete', 'tags', 'Add tags', $this->tags, array('multiple' => true, 'tags' => true));
 
         $mform->addElement('text', 'description', 'Description:');
         $mform->setType('description', PARAM_NOTAGS);
 
         $mform->addElement('text', 'quantity', 'Quantity:');
         $mform->setType('quantity', PARAM_INT);
-
-        $mform->addElement('text', 'comment', 'Comment:');
-        $mform->setType('comment', PARAM_NOTAGS);
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);

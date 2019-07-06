@@ -30,83 +30,79 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
-require_once(dirname(__FILE__).'/resource_class.php');
+require_once(dirname(__FILE__).'/classes/resource_class.php');
+require_once(dirname(__FILE__)."/view_init.php");
 
 global $SESSION;
 
-$id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // ... checkdeadline instance ID - it should be named as the first character of the module.
+if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
 
-if ($id) {
-    $cm         = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $cm->instance), '*', MUST_EXIST);
-} else if ($n) {
-    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $n), '*', MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
-    $cm         = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
-} else {
-    error('You must specify a course_module ID or an instance ID');
-}
+if($SESSION->formData1->resourcetype == 1){
+    //Add database record
+    $record = new Resource(
+        $SESSION->formData1->name,
+        "Bulk material",
+        $SESSION->formData1->description,
+        $SESSION->formData1->category,
+        $SESSION->formData1->quantity,
+        $cm->id,
+        $SESSION->formData1->manufacturer,
+        "",
+        "",
+        implode(";",$SESSION->formData1->tags)
+    );
+    $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
+    redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
+}else {
+    do_header("/mod/ausleihverwaltung/lab_pieceMaterial_view.php");
+    $strName = "New Resource:";
+    echo $OUTPUT->heading($strName);
 
-require_login($course, true, $cm);
-
-$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
-    'objectid' => $PAGE->cm->instance,
-    'context' => $PAGE->context,
-));
-$event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
-$event->trigger();
-
-
-/* PAGE belegen*/
-$PAGE->set_url('/mod/ausleihverwaltung/lab_new_resource_view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($ausleihverwaltung->name));
-$PAGE->set_heading(format_string($course->fullname));
-
-// Hier beginnt die Ausgabe
-echo $OUTPUT->header();
-
-$strName = "New Resource:";
-echo $OUTPUT->heading($strName);
-
-require_once(dirname(__FILE__) . '/forms/lab_pieceMaterialForm.php');
-$mform = new labPieceMaterialForm();
+    require_once(dirname(__FILE__) . '/forms/lab_pieceMaterialForm.php');
+    $mform = new labPieceMaterialForm($SESSION->formData1->quantity);
 
 //Form processing and displaying is done here
-if ($mform->is_cancelled()) {
+    if ($mform->is_cancelled()) {
 
-    unset($SESSION->formData2);
-    //Handle form cancel operation, if cancel button is present on form
-    redirect(new moodle_url('../ausleihverwaltung/lab_new_resource_view.php', array('id' => $cm->id)));
+        unset($SESSION->formData2);
+        //Handle form cancel operation, if cancel button is present on form
+        redirect(new moodle_url('./lab_new_resource_view.php', array('id' => $cm->id)));
 
-} else if ($fromform = $mform->get_data()) {
+    } else if ($fromform = $mform->get_data()) {
+        for($i = 1; $i <= $SESSION->formData1->quantity; $i++) {
+            $comment_prop = 'comment'.$i;
+            $serial_prop = 'serial'.$i;
+            $inventory_nr_prop = 'inventory_nr'.$i;
+            //Add database record
+            $record = new Resource(
+                $SESSION->formData1->name,
+                $fromform->$comment_prop,
+                $SESSION->formData1->description,
+                $SESSION->formData1->category,
+                1,
+                $cm->id,
+                $SESSION->formData1->manufacturer,
+                $fromform->$serial_prop,
+                $fromform->$inventory_nr_prop,
+                implode(";", $SESSION->formData1->tags)
+            );
+            $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
+        }
+        redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 
-    $categories = array('Smartphone', 'Tablet', 'Laptop', 'Computer','Software', 'Printer');
-    $types = array('Apple', 'Samsung', 'Huawei', 'Xiaomi', 'Dell', 'Lenovo', 'Asus');
+    } else {
+        // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+        // or on the first display of the form.
 
-    $form = $SESSION->formData1;
-    $category = $categories[$form->category];
-    $type = $types[$form->type];
-    $SESSION->resourceList[] = (object) array('name' => $form->name, 'comment' => $form->comment, 'description' => $form->description, 'category' => $category, 'resourcetype' => $form->resourcetype, 'type' => $type, 'quantity' => $form->quantity, 'id' => $fromform->ident, 'serial' => $fromform->serial, 'equipment' => $fromform->equip, 'status' => 'Available');
-    redirect(new moodle_url('../ausleihverwaltung/lab_resourcelist_view.php', array('id' => $cm->id)));
+        // Set default data (if any)
+        // Required for module not to crash as a course id is always needed
+        $formdata = array('id' => $id);
+        $mform->set_data($formdata);
+        //displays the form
+        $mform->display();
 
-} else {
-    // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
-    // or on the first display of the form.
+    }
 
-    // Set default data (if any)
-    // Required for module not to crash as a course id is always needed
-    $formdata = array('id' => $id);
-    $mform->set_data($formdata);
-    //displays the form
-    $mform->display();
-
+    // Finish the page.
+    echo $OUTPUT->footer();
 }
-
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_lab_view.php', array('id' => $cm->id)), 'Home');
-
-
-// Finish the page.
-echo $OUTPUT->footer();

@@ -12,11 +12,15 @@ class labResourceDetailForm extends moodleform {
         /* ****************** ID *************/
         $mform->addElement('static', 'ident', 'ID:');
         $mform->setType('ident', PARAM_INT);
-        $mform->setDefault('ident', '-');
+        $mform->setDefault('ident', '0');
+
+        $mform->addElement('static', 'inventory_nr', 'Inventory nr:');
+        $mform->setType('inventory_nr', PARAM_NOTAGS);
+        $mform->setDefault('inventory_nr', '0');
 
         /* ****************** SERIAL *************/
         $mform->addElement('static', 'serial', 'Serial Number:');
-        $mform->setType('serial', PARAM_INT);
+        $mform->setType('name', PARAM_NOTAGS);
         $mform->setDefault('serial', '-');
 
         /* ****************** NAME *************/
@@ -30,9 +34,9 @@ class labResourceDetailForm extends moodleform {
         $mform->setDefault('category', '-');
 
         /* ****************** TYPE *************/
-        $mform->addElement('static', 'type', 'Manufacturer:');
-        $mform->setType('type', PARAM_NOTAGS);
-        $mform->setDefault('type', '-');
+        $mform->addElement('static', 'manufacturer', 'Manufacturer:');
+        $mform->setType('manufacturer', PARAM_NOTAGS);
+        $mform->setDefault('manufacturer', '-');
 
         /* ****************** DESCRIPTION *************/
         $mform->addElement('static', 'description', 'Description:');
@@ -52,21 +56,28 @@ class labResourceDetailForm extends moodleform {
         /* ****************** QUANTITY *************/
         $mform->addElement('static', 'quantity', 'Quantity:');
         $mform->setType('quantity', PARAM_INT);
-        $mform->setDefault('quantity', '-');
+        $mform->setDefault('quantity', '0');
 
         /* ****************** COMMENT *************/
         $mform->addElement('static', 'comment', 'Comment:');
         $mform->setType('comment', PARAM_NOTAGS);
         $mform->setDefault('comment', '-');
 
-        $mform->addElement('hidden', 'id');
-        $mform->setType('id', PARAM_INT);
-
+        $mform->addElement('static', 'tags', 'Tags:');
+        $mform->setType('tags', PARAM_NOTAGS);
+        $mform->setDefault('tags', '-');
+        /*
+         * This is required because Moodle is a bit special, and requires the GET parameters of the HTTP request to be
+         * in the form.
+         */
         $mform->addElement('hidden', 'resourceid');
         $mform->setType('resourceid', PARAM_INT);
 
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
         $mform->addElement('submit', 'btnSubmit', 'Edit');
-        $mform->addElement('cancel', 'cancelBtn', 'Remove');
+        $mform->addElement('cancel', 'cancelBtn', 'Back');
 
     }
     //Custom validation should be added here

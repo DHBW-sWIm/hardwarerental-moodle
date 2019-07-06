@@ -44,3 +44,26 @@ $string['category'] ='category';
 $string['tag'] = 'Tag';
 $string['Stueckgut'] = 'Stueckgut';
 $string['Schuettgut'] = 'Schuettgut';
+
+
+
+//lab_resourcelist_view
+
+$string['lab_resourcelist_title'] = 'Resources';
+$string['lab_resourcelist_new_resource_button'] = 'Register new resource';
+$string['lab_resourcelist_resource_details'] = 'Details';
+
+
+//lab_new_resource_view
+
+$string['lab_new_resource_view_title'] = 'Add Resource';
+
+//Resource fields
+
+$string['resource_id'] = 'ID';
+$string['resource_name'] = 'Name';
+$string['resource_description'] = 'Description';
+$string['resource_comment'] = 'Comment';
+$string['resource_serial'] = 'Serial Nr.';
+$string['resource_quantity'] = 'Quantity';
+$string['resource_inventory_nr'] = 'Inventory Nr.';

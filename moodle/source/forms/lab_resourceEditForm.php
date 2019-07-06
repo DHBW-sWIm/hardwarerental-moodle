@@ -2,20 +2,24 @@
 //moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
+
 class labResourceEditForm extends moodleform {
+
+    public function __construct($categories, $manufacturers, $tags)
+    {
+        $this->categories = $categories;
+        $this->manufacturers = $manufacturers;
+        $this->tags = $tags;
+        parent::__construct();
+    }
 
     public function definition() {
         global $CFG;
         $mform = $this->_form; // Don't forget the underscore!
 
-        /* ****************** ID *************/
-        $mform->addElement('static', 'ident', 'ID:');
-        $mform->setType('ident', PARAM_INT);
-        $mform->setDefault('ident', '-');
-
         /* ****************** SERIAL *************/
-        $mform->addElement('static', 'serial', 'Serial Number:');
-        $mform->setType('serial', PARAM_INT);
+        $mform->addElement('text', 'serial', 'Serial Number:');
+        $mform->setType('serial', PARAM_NOTAGS);
         $mform->setDefault('serial', '-');
 
         /* ****************** NAME *************/
@@ -24,47 +28,46 @@ class labResourceEditForm extends moodleform {
         $mform->setDefault('name', '-');
 
         /* ****************** TYPE *************/
-        $mform->addElement('static', 'category', 'Category:');
-        $mform->setType('category', PARAM_NOTAGS);
-        $mform->setDefault('category', '-');
+        $mform->addElement('autocomplete', 'category', 'Category',
+            $this->categories,
+            array('tags'=>true)
+        );
 
-        /* ****************** TYPE *************/
-        $mform->addElement('static', 'type', 'Manufacturer:');
-        $mform->setType('type', PARAM_NOTAGS);
-        $mform->setDefault('type', '-');
+        $mform->addElement('autocomplete', 'manufacturer', 'Manufacturer',
+            $this->manufacturers,
+            array('tags' => true)
+        );
 
         /* ****************** DESCRIPTION *************/
         $mform->addElement('text', 'description', 'Description:');
         $mform->setType('description', PARAM_NOTAGS);
         $mform->setDefault('description', '-');
 
-        /* ****************** STATUS *************/
-        $mform->addElement('static', 'status', 'Status:');
-        $mform->setType('status', PARAM_NOTAGS);
-        $mform->setDefault('status', '-');
-
-        /* ****************** DATE *************/
-        $mform->addElement('static', 'date', 'Return Date:');
-        $mform->setType('date', PARAM_NOTAGS);
-        $mform->setDefault('date', '-');
 
         /* ****************** QUANTITY *************/
         $mform->addElement('text', 'quantity', 'Quantity:');
         $mform->setType('quantity', PARAM_INT);
-        $mform->setDefault('quantity', '1');
+        $mform->setDefault('quantity', '0');
 
         /* ****************** COMMENT *************/
         $mform->addElement('text', 'comment', 'Comment:');
         $mform->setType('comment', PARAM_NOTAGS);
         $mform->setDefault('comment', '-');
 
-        $mform->addElement('hidden', 'id');
-        $mform->setType('id', PARAM_INT);
+
+        $mform->addElement('autocomplete', 'tags', 'Add tags', $this->tags, array('multiple' => true, 'tags' => true));
 
         $mform->addElement('hidden', 'resourceid');
         $mform->setType('resourceid', PARAM_INT);
 
-        $mform->addElement('submit', 'btnSubmit', 'Save Changes');
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
+        /* ****************** ID *************/
+        $mform->addElement('text', 'inventory_nr', 'Inventory Number:');
+        $mform->setType('inventory_nr', PARAM_NOTAGS);
+
+        $mform->addElement('submit', 'btnSubmit', 'Change');
         $mform->addElement('cancel', 'cancelBtn', 'Cancel');
 
     }

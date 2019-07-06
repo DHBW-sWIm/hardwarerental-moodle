@@ -95,6 +95,5 @@ foreach ($SESSION->applicationList as $application){
 echo html_writer::table($table);
 
 echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_student_view.php', array('id' => $cm->id)), 'Home');
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/stdnt_reset_applications.php', array('id' => $cm->id)), 'Reset');
 
 echo $OUTPUT->footer();

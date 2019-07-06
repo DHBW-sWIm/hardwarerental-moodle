@@ -35,7 +35,7 @@ require_once(dirname(__FILE__).'/classes/resource_class.php');
 
 if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
 
-do_header("/mod/ausleihverwaltung/lab_resourcelist_view.php");
+do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 

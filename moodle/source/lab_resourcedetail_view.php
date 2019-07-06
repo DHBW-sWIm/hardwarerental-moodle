@@ -30,9 +30,11 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
-include(__DIR__ . '/view_init.php');
+require_once(dirname(__FILE__)."/view_init.php");
 
-do_header("/mod/ausleihverwaltung/lab_resourcelist_view.php");
+if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
+
+do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 $resourceid = optional_param('resourceid', 0, PARAM_INT);
 

@@ -33,9 +33,9 @@ require_once(dirname(__FILE__).'/locallib.php');
 require_once(dirname(__FILE__).'/classes/resource_class.php');
 require_once(dirname(__FILE__)."/view_init.php");
 
-global $SESSION;
-
 if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
+
+global $SESSION;
 
 if($SESSION->formData1->resourcetype == 1){
     //Add database record
@@ -54,7 +54,7 @@ if($SESSION->formData1->resourcetype == 1){
     $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
     redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 }else {
-    do_header("/mod/ausleihverwaltung/lab_pieceMaterial_view.php");
+    do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
     $strName = "New Resource:";
     echo $OUTPUT->heading($strName);
 

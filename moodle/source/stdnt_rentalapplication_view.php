@@ -87,14 +87,22 @@ if ($mform->is_cancelled()) {
     $response = $client->post($url,
         [ GuzzleHttp\RequestOptions::JSON =>
             [ 'variables' => [
-                'stdnt_name' => new camunda_var($fromform->studentName, 'string'),
-                'stdnt_matr' => new camunda_var($fromform->studentId, 'string'),
-                'stdnt_length' => new camunda_var($fromform->returnDate, 'string'),
-                'stdnt_resource' => new camunda_var($resource->name, 'string'),
+                'stdnt_firstname' => new camunda_var($USER->firstname, 'string'),
+                'stdnt_lastname' => new camunda_var($USER->lastname, 'string'),
+                'stdnt_id' => new camunda_var($fromform->studentId, 'string'),
                 'stdnt_reason' => new camunda_var($fromform->grund, 'string'),
                 'stdnt_comment' => new camunda_var($fromform->anmerkung, 'string'),
                 'stdnt_mail' => new camunda_var($fromform->studentEmail, 'string'),
-                'application_date' => new camunda_var(time(), 'string'),
+                'stdnt_address' => new camunda_var($USER->address, 'string'),
+                'stdnt_city' => new camunda_var($USER->city, 'string'),
+                'stdnt_phone' => new camunda_var($USER->phone1, 'string'),
+                'stdnt_username' => new camunda_var($USER->username, 'string'),
+                'stdnt_course' => new camunda_var('WWI16SCB', 'string'),
+                'resource_name' => new camunda_var($resource->name, 'string'),
+                'resource_id' => new camunda_var($resource->id, 'string'),
+                'applic_from' => new camunda_var($fromform->fromDate, 'string'),
+                'applic_to' => new camunda_var($fromform->returnDate, 'string'),
+                'req_date' => new camunda_var(time(), 'string'),
             ]
             ]
         ]

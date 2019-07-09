@@ -37,10 +37,10 @@ global $SESSION;
 do_header('/mod/ausleihverwaltung/stdnt_available_resource_view.php');
 
 // Output starts here.
-echo $OUTPUT->header();
+/*echo $OUTPUT->header();
 
 $strName = "Available Resources:";
-echo $OUTPUT->heading($strName);
+echo $OUTPUT->heading($strName);*/
 
 echo '<br>';
 
@@ -68,10 +68,10 @@ if ($mform->is_cancelled()) {
 echo '<br>';
 
 $table = new html_table();
-$table->head = array('Name', 'Description', 'Quantity', 'Select');
+$table->head = array('ID', 'Name', 'Description', 'Quantity', 'Select');
 
 
-foreach($SESSION->resourceList as $resource) {
+/*foreach($SESSION->resourceList as $resource) {
     if ('Available' == $resource->status || 'Requested' == $resource->status) {
         if($resource->resourcetype == 'Bulk Material'){
             $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_available_resourceBulk_detail_view.php', array('id' => $cm->id, 'resourceName' => $resource->name)), 'Select', $attributes=null);
@@ -81,6 +81,13 @@ foreach($SESSION->resourceList as $resource) {
         }
         $table->data[] = array($resource->name, $resource->description, $resource->status, $resource->quantity, $htmlLink);
     }
+}*/
+
+$resources = $DB->get_records('hardware_rental_resources',array('tenant'=>$cm->id));
+
+foreach ($resources as $resource){
+    $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/stdnt_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
+    $table->data[] = array($resource->id, $resource->name, $resource->description, $resource->quantity, $htmlLink);
 }
 
 echo html_writer::table($table);

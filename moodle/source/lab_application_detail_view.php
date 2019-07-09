@@ -31,6 +31,7 @@ require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once(dirname(__FILE__)."/view_init.php");
+require_once(dirname(__FILE__)."/classes/pdf_class.php");
 
 if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
 
@@ -58,6 +59,32 @@ require_once(__DIR__ . '/forms/lab_applicationDetailForm.php');
 $mform = new labApplicationDetailForm();
 $mform->render();
 
+$data = array();
+
+if ($taskid) {
+    //Create a client
+    $client = new GuzzleHttp\Client();
+    // Send a request
+    $response = $client->get($camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_variables_api);
+
+    $body = $response->getBody();
+    $variables = json_decode($body, true);
+    $return = date("Y-m-d", $variables['applic_to']['value']);
+
+    //Set Data from variables
+    $data = array(
+        'id' => $cm->id,
+        'taskid' => $taskid,
+        "name" => $variables['stdnt_firstname']['value'],
+        "matr" => $variables['stdnt_id']['value'],
+        "email" => $variables['stdnt_email']['value'],
+        "date" => $return,
+        "resource" => $variables['resource_name']['value'],
+        "reason" => $variables['stdnt_reason']['value'],
+        "comment" => $variables['stdnt_comment']['value'],
+    );
+}
+
 
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
@@ -82,41 +109,26 @@ if ($mform->is_cancelled()) {
             ]
         ]
     );
-
     $code = $response->getStatusCode();
+
+    $pdf = new PDF();
+    $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_email']['value']);
+    $pdf->Signatures(date("Y-m-d"));
+
+    $pdfString = $pdf->Output("", "S");
+
+    $SESSION->pdf = $pdfString;
+
     // Redirect to the course result page.
-    $returnurl = new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
+    $returnurl = new moodle_url('../ausleihverwaltung/pdf_test.php', array('id' => $cm->id));
+    //$returnurl = new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
+    //redirect($returnurl);
     redirect($returnurl);
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
     // or on the first display of the form.
     // Set default data (if any)
     // Required for module not to crash as a course id is always needed
-    $data = array();
-
-    if ($taskid) {
-        //Create a client
-        $client = new GuzzleHttp\Client();
-        // Send a request
-        $response = $client->get($camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_variables_api);
-
-        $body = $response->getBody();
-        $variables = json_decode($body, true);
-        $return = date("Y-m-d", $variables['stdnt_length']['value']);
-
-        //Set Data from variables
-        $data = array(
-            'id' => $cm->id,
-            'taskid' => $taskid,
-            "name" => $variables['stdnt_name']['value'],
-            "matr" => $variables['stdnt_matr']['value'],
-            "email" => $variables['stdnt_mail']['value'],
-            "date" => $return,
-            "resource" => $variables['stdnt_resource']['value'],
-            "reason" => $variables['stdnt_reason']['value'],
-            "comment" => $variables['stdnt_comment']['value'],
-        );
-    }
 
     $formdata = $data;
     $mform->set_data($formdata);

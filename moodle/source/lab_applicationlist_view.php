@@ -51,7 +51,7 @@ $camunda_task_variables_api = $ini['camunda_task_variables_api'];
 //Create a client
 $client = new GuzzleHttp\Client();
 // Send a request
-$response = $client->get($camunda_url . $camunda_task_api . '?processDefinitionKey=Request_Approval_2&taskDefinitionKey=DHBW_Approval');
+$response = $client->get($camunda_url . $camunda_task_api . '?processDefinitionKey=hardwarerental-request-approval&taskDefinitionKey=hardwarerental.DHBW_Approval');
 
 $body = $response->getBody();
 $tasks = json_decode($body, true);
@@ -69,12 +69,12 @@ foreach ($tasks as $task) {
     $body = $response2->getBody();
     $variables = json_decode($body, true);
 
-    $date = date("Y-m-d", $variables['application_date']['value']);
+    $date = date("Y-m-d", $variables['req_date']['value']);
 
     //Link zum löschen des Verantwortlichen in foreach-Schleife setzen
     $detailButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_application_detail_view.php', array('id' => $cm->id, 'taskid' => $taskId)), 'Details', $attributes = null);
     //Daten zuweisen an HTML-Tabelle
-    $table->data[] = array($name, $variables['stdnt_name']['value'], $date, $variables['stdnt_resource']['value'], $detailButton);
+    $table->data[] = array($name, $variables['stdnt_firstname']['value'], $date, $variables['resource_name']['value'], $detailButton);
 }
 //Tabelle ausgeben
 echo html_writer::table($table);

@@ -36,6 +36,8 @@ $taskid = optional_param("taskid","",PARAM_NOTAGS);
 $document = optional_param("documentId","",PARAM_NOTAGS);
 $coc = optional_param("cocId","",PARAM_NOTAGS);
 
+if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
+
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
@@ -43,14 +45,24 @@ global $SESSION;
 echo $OUTPUT->heading("Successfully completed the signature process");
 echo '<br>';
 
-complete_task($taskid, [
-        'document' => camunda_string($document),
-        'coc' => camunda_string($coc)
-    ]);
+$tasks = get_tasks_by_key("hardwarerental.signature");
+
+//Tabelle mit camunda
+$table = new html_table();
+$table->head = array('ProcessID', 'Student', '');
+//Für jeden Datensatz
+echo "<textarea>";
+foreach ($tasks as $task) {
+    print_r($task);
+    //$table->data[] = array($task["name"], $variables['stdnt_firstname']['value'], $date, $variables['resource_name']['value'], $detailButton);
+}
+echo "</textarea>";
+//Tabelle ausgeben
+echo html_writer::table($table);
 
 echo $OUTPUT->single_button(
-    new moodle_url('./lab_rentallist_view.php', array('id'=>$cm->id)),
-    "Back to the signature list"
+    new moodle_url('./main_lab_view.php', array('id'=>$cm->id)),
+    "Back"
 );
 
 echo $OUTPUT->footer();

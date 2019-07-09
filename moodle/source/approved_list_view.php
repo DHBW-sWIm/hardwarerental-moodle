@@ -43,9 +43,6 @@ global $SESSION;
 echo $OUTPUT->heading("Successfully completed the signature process");
 echo '<br>';
 
-$document = dirname("https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}")."/pdf_from_string.php?id=".$document;
-$coc = dirname("https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}")."/pdf_from_string.php?id=".$coc;
-
 complete_task($taskid, [
         'document' => camunda_string($document),
         'coc' => camunda_string($coc)

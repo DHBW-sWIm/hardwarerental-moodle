@@ -51,12 +51,10 @@ $tasks = get_tasks_by_key("hardwarerental.signature");
 $table = new html_table();
 $table->head = array('ProcessID', 'Student', '');
 //Für jeden Datensatz
-echo "<textarea>";
 foreach ($tasks as $task) {
-    print_r($task);
-    //$table->data[] = array($task["name"], $variables['stdnt_firstname']['value'], $date, $variables['resource_name']['value'], $detailButton);
+    $detailButton = $OUTPUT->single_button(new moodle_url('./lab_approved_list_detail_view.php', array('id' => $cm->id, 'taskid' => $task['id'])), 'Details', $attributes = null);
+    $table->data[] = array($task["id"], "", $detailButton);
 }
-echo "</textarea>";
 //Tabelle ausgeben
 echo html_writer::table($table);
 

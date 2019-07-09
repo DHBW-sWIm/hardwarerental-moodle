@@ -43,6 +43,16 @@ global $SESSION;
 echo $OUTPUT->heading("Start signature process?");
 echo '<br>';
 
+$taskvars = get_all_task_variables_by_id($taskid);
+
+echo "Borrower name: ".$taskvars['stdnt_name']['value'];
+echo "Borrower email: ".$taskvars['stdnt_mail']['value'];
+
+
+echo $OUTPUT->single_button(
+    new moodle_url($taskvars['docusign_link']['value']),
+    "To document signature"
+);
 
 
 echo $OUTPUT->single_button(

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="moodle.InMemoryH2Test" time="2.815" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="moodle.InMemoryH2Test" time="2.044" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2018.3.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,6 +62,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="moodle.InMemoryH2Test" name="testParsingAndDeployment" time="2.593"/>
-  <testcase classname="moodle.InMemoryH2Test" name="testHappyPath" time="0.222"/>
+  <testcase classname="moodle.InMemoryH2Test" name="testParsingAndDeployment" time="1.771"/>
+  <testcase classname="moodle.InMemoryH2Test" name="testHappyPath" time="0.273"/>
 </testsuite>

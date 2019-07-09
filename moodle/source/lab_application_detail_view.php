@@ -97,8 +97,6 @@ if ($mform->is_cancelled()) {
 
     //Create a client
     $client = new GuzzleHttp\Client();
-    // Send HTTP POST and use class camunda_var
-    //TODO: make easy to use standard & document
     $response = $client->post($url,
         [GuzzleHttp\RequestOptions::JSON =>
             ['variables' => [
@@ -106,8 +104,11 @@ if ($mform->is_cancelled()) {
             ]
             ]
         ]
-    );
-    $code = $response->getStatusCode();*/
+    );*/
+
+    $response5 = complete_task($taskid, ['application_approval' => new camunda_variable(true, 'boolean')]);
+
+    print_r($response5);
 
     $pdf = new PDF();
     $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_mail']['value']);
@@ -163,11 +164,13 @@ if ($mform->is_cancelled()) {
         ]
     );
 
-    $response4 = complete_task($response2[0]['id'], ['docusign_link' => camunda_string($response3->getBody())]);
+    $docusignLink = str_replace(array('"', '\\'), '', $response3->getBody());
+
+    $response4 = complete_task($response2[0]['id'], ['docusign_link' => camunda_string($docusignLink)]);
 
     print_r($response4);
     print($response2[0]['id']);
-    print($response3->getBody());
+    print($docusignLink);
 
     // Redirect to the course result page.
     $returnurl = new moodle_url('../ausleihverwaltung/pdf_test.php', array('id' => $cm->id));

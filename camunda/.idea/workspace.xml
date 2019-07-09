@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23164aa5-c9e9-49e4-8109-514839d3d4a6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moodle/source/classes/pdf_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../moodle/source/classes/pdf_class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/process.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/process.bpmn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../moodle/source/lab_application_detail_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/../moodle/source/lab_application_detail_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moodle/source/pdf_generate.php" beforeDir="false" afterPath="$PROJECT_DIR$/../moodle/source/pdf_generate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moodle/source/stdnt_rentalapplication_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/../moodle/source/stdnt_rentalapplication_view.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +17,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/process.bpmn">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-799" />
+            <state>
+              <caret column="4" selection-start-column="4" selection-end-column="4" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -35,12 +34,18 @@
         <option value="$PROJECT_DIR$/src/main/java/moodle/MailStudentIllnessApproved.java" />
         <option value="$PROJECT_DIR$/src/main/java/moodle/MailMgmtStudentIsIll.java" />
         <option value="$PROJECT_DIR$/src/main/java/moodle/MailStudentIllnessDecline.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/process.bpmn" />
       </list>
     </option>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand />
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="bpx-mvp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
       <select />
     </treeState>
   </component>
@@ -55,7 +60,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -77,6 +81,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -118,16 +123,18 @@
       <workItem from="1560899868822" duration="646000" />
       <workItem from="1562673974678" duration="49000" />
       <workItem from="1562678805752" duration="1313000" />
+      <workItem from="1562695503144" duration="294000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3253000" />
+    <option name="totallyTimeSpent" value="3547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26477733" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26963562" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -135,10 +142,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3285968" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -150,6 +156,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -170,7 +177,9 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/moodle/MailMgmtStudentIsIll.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/process.bpmn">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-799" />
+        <state>
+          <caret column="4" selection-start-column="4" selection-end-column="4" />
+        </state>
       </provider>
     </entry>
   </component>

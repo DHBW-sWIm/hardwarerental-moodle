@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_12q03ll" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
   <bpmn:collaboration id="Collaboration_0ajjq4a">
-    <bpmn:participant id="dsjfadskjgdsfgkjdsflkjgldsjgdsg" processRef="hardwarerental-request-approval" />
+    <bpmn:participant id="dsjfadskjgdsfgkjdssg" processRef="hardwarerental-request-approval2" />
   </bpmn:collaboration>
-  <bpmn:process id="hardwarerental-request-approval" name="Hardwarerental Request Approval" isExecutable="true">
+  <bpmn:process id="hardwarerental-request-approval2" name="Hardwarerental Request Approval 2" isExecutable="true">
     <bpmn:userTask id="hardwarerental.DHBW_Approval" name="Work on Request">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -68,7 +68,7 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0ajjq4a">
-      <bpmndi:BPMNShape id="Participant_0mcf56u_di" bpmnElement="dsjfadskjgdsfgkjdsflkjgldsjgdsg" isHorizontal="true">
+      <bpmndi:BPMNShape id="Participant_0mcf56u_di" bpmnElement="dsjfadskjgdsfgkjdssg" isHorizontal="true">
         <dc:Bounds x="156" y="112" width="780" height="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">

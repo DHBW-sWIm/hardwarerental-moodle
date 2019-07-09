@@ -120,44 +120,75 @@ if ($mform->is_cancelled()) {
 
     $url = 'https://hardware-rental.moodle-dhbw.de/webservice/restjson/server.php';
 
-    $data = array("wstoken" => 'cf9d830b64c888d67d3e893821f8d711',
+    $base_pdf = base64_encode($pdfString);
+
+    /*$data = array(
+        "wstoken" => "a57ddc480bf214b4d6be20263ab8fe00",
         "wsfunction" => "local_digitalsignature_createEnvelope",
-        "pdfDocument" => $pdfString,
-        "documentName" => 'Antrag.pdf',
-        "returnUrl" => 'https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25',
-            "signers" => array(
+        "pdfDocument" => $base_pdf,
+        "documentName" => "Antrag.pdf",
+        "returnUrl" => "https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25",
+        "signers" => array(
             array(
                 "email" => $variables['stdnt_mail']['value'],
                 "firstname" => $variables['stdnt_firstname']['value'],
                 "lastname" => $variables['stdnt_lastname']['value'],
                 "tabs" => array (
-                        array (
-                            "type" => "Signature",
-                            "xPos" => "394",
-                            "yPosition" => "187",
-                            "page" => "1",
-                        ),
-                        array (
-                            "type" => "Date",
-                            "xPos" => "119",
-                            "yPos" => "220",
-                            "page" => "1",
-                        )
+                    array (
+                        "type" => "Signature",
+                        "xPos" => "394",
+                        "yPosition" => "187",
+                        "page" => "1"
+                    ),
+                    array (
+                        "type" => "Date",
+                        "xPos" => "119",
+                        "yPos" => "220",
+                        "page" => "1"
+                    )
                 )
             )
         ),
         "moodlewsrestformat" => "json",
     );
-    $data_string = json_encode($data);
-
+    $data_string = json_encode($data);*/
 
     $client = new GuzzleHttp\Client();
     $response = $client->post($url,
         [GuzzleHttp\RequestOptions::JSON =>
-            $data_string
+            [
+                "wstoken" => "a57ddc480bf214b4d6be20263ab8fe00",
+                "wsfunction" => "local_digitalsignature_createEnvelope",
+                "pdfDocument" => $base_pdf,
+                "documentName" => "Antrag.pdf",
+                "returnUrl" => "https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25",
+                "signers" => [
+                    [
+                        "email" => $variables['stdnt_mail']['value'],
+                        "firstName" => $variables['stdnt_firstname']['value'],
+                        "lastName" => $variables['stdnt_lastname']['value'],
+                        "tabs" => [
+                            [
+                                "type" => "Signature",
+                                "xPos" => "394",
+                                "yPos" => "187",
+                                "page" => "1"
+                            ],
+                            [
+                                "type" => "Date",
+                                "xPos" => "119",
+                                "yPos" => "220",
+                                "page" => "1"
+                            ]
+                        ]
+                    ]
+                ],
+                "moodlewsrestformat" => "json",
+            ]
         ]
     );
     $code = $response;
+    //echo($data_string);
     echo($code->getStatusCode());
     echo($code->getBody());
 

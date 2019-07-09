@@ -33,11 +33,6 @@ class stdntAvailableResourceForm extends moodleform {
         $mform->setDefault('type', '-');
 
         /* ****************** STATUS *************/
-        $mform->addElement('static', 'status', 'Status:');
-        $mform->setType('status', PARAM_NOTAGS);
-        $mform->setDefault('status', '-');
-
-        /* ****************** STATUS *************/
         $mform->addElement('static', 'comment', 'Comment:');
         $mform->setType('comment', PARAM_NOTAGS);
         $mform->setDefault('comment', '-');

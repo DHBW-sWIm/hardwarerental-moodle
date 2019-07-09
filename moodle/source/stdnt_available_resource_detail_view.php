@@ -30,9 +30,11 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
-require_once(dirname(__FILE__).'view_init.php');
+require_once(dirname(__FILE__).'/view_init.php');
 
 global $SESSION;
+
+$resourceid = optional_param('resourceid', 0, PARAM_INT);
 
 do_header('/mod/ausleihverwaltung/stdnt_available_resource_detail_view.php');
 
@@ -58,14 +60,17 @@ if ($mform->is_cancelled()) {
     // Required for module not to crash as a course id is always needed
 
     $resource = new stdClass();
-    foreach($SESSION->resourceList as $item) {
+
+    $resource = $DB->get_record('hardware_rental_resources',array('id'=>$resourceid));
+
+    /*foreach($SESSION->resourceList as $item) {
         if ($resourceid == $item->id) {
             $resource = $item;
             break;
         }
-    }
+    }*/
 
-    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'ident' => $resource->id, 'name' => $resource->name, 'type' => $resource->type, 'category' => $resource->category, 'description' => $resource->description, 'status' => $resource->status, 'quantity' => $resource->quantity, 'comment' => $resource->comment);
+    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'ident' => $resource->id, 'name' => $resource->name, 'manufacturer' => $resource->manufacturer, 'category' => $resource->category, 'description' => $resource->description, 'quantity' => $resource->quantity, 'comment' => $resource->comment);
     $mform->set_data($formdata);
     //displays the form
     $mform->display();

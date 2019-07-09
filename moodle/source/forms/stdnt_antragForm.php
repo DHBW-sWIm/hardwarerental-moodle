@@ -9,19 +9,22 @@ class stdntAntragForm extends moodleform {
 
         $mform = $this->_form; // Don't forget the underscore!
 
-        $mform->addElement('text', 'ausleiher', 'Your Name:',$attributes='size=“100”');
-        $mform->setType('ausleiher', PARAM_NOTAGS);
+        $mform->addElement('text', 'studentName', 'Your Name:',$attributes='size=“100”');
+        $mform->setType('studentName', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'matrikel', 'Matriculation Number:');
-        $mform->setType('matrikel', PARAM_NOTAGS);
+        $mform->addElement('text', 'studentId', 'Student ID:');
+        $mform->setType('studentId', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'mail', 'E-Mail:');
-        $mform->setType('mail', PARAM_NOTAGS);
+        $mform->addElement('text', 'studentEmail', 'E-Mail:');
+        $mform->setType('studentEmail', PARAM_NOTAGS);
 
         $mform->addElement('text', 'grund', 'Reason:'); // Add elements to your form
         $mform->setType('grund', PARAM_NOTAGS);        //Default value
 
-        $mform->addElement('date_selector', 'returnDate', 'Return Date:');
+
+        $mform->addElement('date_selector', 'fromDate', 'From:');
+
+        $mform->addElement('date_selector', 'returnDate', 'To:');
 
         $mform->addElement('text', 'anmerkung', 'Comment:');
         $mform->setType('anmerkung', PARAM_NOTAGS);
@@ -29,9 +32,6 @@ class stdntAntragForm extends moodleform {
 
         $mform->addElement('select', 'assignee',
             'Responsible:', array('Prof. Martin', 'Prof. Koslowski', 'Gzuz', 'Tichy'));
-
-        $mform->addElement('button', 'newResp', 'Add Responsible');
-
 
         // error_log("TEST FROM INSIDE FORM");
 

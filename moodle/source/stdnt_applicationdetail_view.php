@@ -36,6 +36,8 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 
+$applicationid = optional_param('applicationid', 0, PARAM_INT);
+
 $strName = "Application Details:";
 echo $OUTPUT->heading($strName);
 
@@ -70,7 +72,7 @@ if ($mform->is_cancelled()) {
     $date = date('d.m.y',$date);
 
 
-    $formdata = array('id' => $id, 'applicationid' => $applicationid, 'type' => $application->applicationtype, 'name' => $application->ausleiher, 'status' => $application->status, 'resource' => $application->resource, 'date' => $date, 'quantity' => $application->amount, 'assignee' => $application->assignee, 'grund' => $application->grund);
+    $formdata = array('id' => $id, 'applicationid' => $applicationid, 'type' => $application->applicationtype, 'name' => $application->studentName, 'status' => $application->status, 'resource' => $application->resource, 'date' => $date, 'assignee' => $application->assignee, 'grund' => $application->grund);
     $mform->set_data($formdata);
     //displays the form
     $mform->display();

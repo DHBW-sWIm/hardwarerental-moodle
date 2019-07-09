@@ -36,6 +36,9 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 
+
+$resourceid = optional_param('resourceid', 0, PARAM_INT);
+
 $strName = "Personal Information:";
 echo $OUTPUT->heading($strName);
 
@@ -51,16 +54,19 @@ if ($mform->is_cancelled()) {
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
     $resource = new stdClass();
-    foreach($SESSION->resourceList as $item) {
+    /*foreach($SESSION->resourceList as $item) {
         if ($fromform->resourceName == $item->name) {
             $resource = $item;
             break;
         }
-    }
+    }*/
+
+    $resource = $DB->get_record('hardware_rental_resources',array('id'=>$fromform->resourceid));
+
     $appId = rand(1,10000);
     $responsibles = array('Prof. Martin', 'Prof. Koslowski', 'Gzuz', 'Tichy');
     $responsible = $responsibles[$fromform->assignee];
-    $SESSION->applicationList[] = (object) array('id' => $appId, 'ausleiher' => $fromform->ausleiher, 'matrikel' => $fromform->matrikel, 'mail' => $fromform->mail, 'resource' => $resource->name, 'grund' => $fromform->grund, 'returndate' => $fromform->returnDate, 'anmerkung' => $fromform->anmerkung, 'assignee' => $responsible, 'applicationtype' => 'Rental Application', 'status' => 'Requested');
+    $SESSION->applicationList[] = (object) array('id' => $appId, 'student_name' => $fromform->studentName, 'student_id' => $fromform->studentId, 'mail' => $fromform->studentEmail, 'resource' => $resource->name, 'grund' => $fromform->grund, 'returndate' => $fromform->returnDate, 'anmerkung' => $fromform->anmerkung, 'assignee' => $responsible, 'applicationtype' => 'Rental Application', 'status' => 'Requested');
 
     // redirect(new moodle_url('../ausleihverwaltung/stdnt_applicationlist_view.php', array('id' => $cm->id)));
 
@@ -81,13 +87,13 @@ if ($mform->is_cancelled()) {
     $response = $client->post($url,
         [ GuzzleHttp\RequestOptions::JSON =>
             [ 'variables' => [
-                'stdnt_name' => new camunda_var($fromform->ausleiher, 'string'),
-                'stdnt_matr' => new camunda_var($fromform->matrikel, 'string'),
+                'stdnt_name' => new camunda_var($fromform->studentName, 'string'),
+                'stdnt_matr' => new camunda_var($fromform->studentId, 'string'),
                 'stdnt_length' => new camunda_var($fromform->returnDate, 'string'),
                 'stdnt_resource' => new camunda_var($resource->name, 'string'),
                 'stdnt_reason' => new camunda_var($fromform->grund, 'string'),
                 'stdnt_comment' => new camunda_var($fromform->anmerkung, 'string'),
-                'stdnt_mail' => new camunda_var($fromform->mail, 'string'),
+                'stdnt_mail' => new camunda_var($fromform->studentEmail, 'string'),
                 'application_date' => new camunda_var(time(), 'string'),
             ]
             ]
@@ -105,7 +111,7 @@ if ($mform->is_cancelled()) {
     // Set default data (if any)
     // Required for module not to crash as a course id is always needed
 
-    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'resourceName' => $resourceName);
+    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'studentName' => ($USER->firstname . " " . $USER->lastname), 'studentId' => $USER->id, 'studentEmail' => $USER->email );
     $mform->set_data($formdata);
     //displays the form
     $mform->display();

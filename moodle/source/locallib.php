@@ -29,387 +29,111 @@ require_once(__DIR__ . '/lib/autoload.php');
 
 defined('MOODLE_INTERNAL') || die();
 
-$processDefinitionsApiInstance = null;
-$processInstancesApiInstance = null;
-$tasksApiInstance = null;
-$formsApiInstance = null;
-
-function create_api_instances() {
-	// Configure HTTP basic authorization: basicAuth
-	$config = Swagger\Client\Configuration::getDefaultConfiguration()
-		->setUsername('kermit')
-		->setPassword('kermit');
-
-	global $engineApiInstance;
-	$engineApiInstance = new Swagger\Client\Api\EngineApi(
-		// If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		// This is optional, `GuzzleHttp\Client` will be used as default.
-		new GuzzleHttp\Client(),
-		$config
-	);
-
-	global $processDefinitionsApiInstance;
-	$processDefinitionsApiInstance = new Swagger\Client\Api\ProcessDefinitionsApi(
-		// If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		// This is optional, `GuzzleHttp\Client` will be used as default.
-		new GuzzleHttp\Client(),
-		$config
-	);
-
-	global $processInstancesApiInstance;
-	$processInstancesApiInstance = new Swagger\Client\Api\ProcessInstancesApi(
-		// If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		// This is optional, `GuzzleHttp\Client` will be used as default.
-		new GuzzleHttp\Client(),
-		$config
-	);
-
-	global $tasksApiInstance;
-	$tasksApiInstance = new Swagger\Client\Api\TasksApi(
-		// If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		// This is optional, `GuzzleHttp\Client` will be used as default.
-		new GuzzleHttp\Client(),
-		$config
-	);
-
-	global $formsApiInstance;
-	$formsApiInstance = new Swagger\Client\Api\FormsApi(
-		// If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		// This is optional, `GuzzleHttp\Client` will be used as default.
-		new GuzzleHttp\Client(),
-		$config
-	);
+//Global Client Variable
+global $client;
+//Fetch Camunda URL
+$ini = parse_ini_file(__DIR__ . '/.ini');
+$camunda_url = $ini['camunda_url'];
+$camunda_api = $camunda_url . 'engine-rest/';
+//Create Guzzle Client
+$client = new GuzzleHttp\Client([
+    'base_uri' => $camunda_api,
+]);
+//======================================================================
+// PROCESS FUNCTIONS FOR CAMUNDA
+//======================================================================
+function get_all_camunda_users() {
+    global $client;
+    $res = $client->get('user');
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_do_something_useful(array $things) {
-    return new stdClass();
+function start_process($key, $variables) {
+    global $client;
+    $process_url = 'process-definition/key/' . $key . '/start';
+    $res = $client->post($process_url, [
+        GuzzleHttp\RequestOptions::JSON =>
+            ['variables' => $variables]
+    ]);
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_get_process_definition_id($processKey) {
-	global $processDefinitionsApiInstance;
-
-	$version = null; // int | Only return process definitions with the given version.
-	$name = null; // string | Only return process definitions with the given name.
-	$name_like = null; // string | Only return process definitions with a name like the given name.
-	$key_like = null; // string | Only return process definitions with a name like the given key.
-	$resource_name = null; // string | Only return process definitions with the given resource name.
-	$resource_name_like = null; // string | Only return process definitions with a name like the given resource name.
-	$category = null; // string | Only return process definitions with the given category.
-	$category_like = null; // string | Only return process definitions with a category like the given name.
-	$category_not_equals = null; // string | Only return process definitions which donï¿½t have the given category.
-	$deployment_id = null; // string | Only return process definitions with the given category.
-	$startable_by_user = null; // string | Only return process definitions which are part of a deployment with the given id.
-	$latest = "true"; // bool | Only return the latest process definition versions. Can only be used together with key and keyLike parameters, using any other parameter will result in a 400-response.
-	$suspended = null; // bool | If true, only returns process definitions which are suspended. If false, only active process definitions (which are not suspended) are returned.
-	$sort = "version"; // string | Property to sort on, to be used together with the order.
-	try {
-		$result = $processDefinitionsApiInstance->getProcessDefinitions($version, $name, $name_like, $processKey, $key_like, $resource_name, $resource_name_like, $category, $category_like, $category_not_equals, $deployment_id, $startable_by_user, $latest, $suspended, $sort);
-        $process_definition_id = "meisterkey:1:10870"; //fix gesetzt, sollte bei Activit-Integration dynamisch aufgebaut werden
-		return $process_definition_id;
-	} catch (Exception $e) {
-		echo 'Exception when calling ProcessDefinitionsApi->getProcessDefinitions: ', 	$e->getMessage(), PHP_EOL;
-		return null;
-	}
+// get all tasks for one taskDefinitionKey. Needs to be set in Camunda Modeler as Id on one task.
+// Example: 'bpxtest.verify_illness'
+// filter is optional
+function get_tasks_by_key($taskDefinitionKey, $filters = []) {
+    global $client;
+    $taskKeyFilter = ['taskDefinitionKey' => $taskDefinitionKey];
+    $merged_filters = array_merge($filters, $taskKeyFilter);
+    $res = $client->get('task', [
+        'query' => $merged_filters
+    ]);
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_start_process($process_definition_id, $business_key) {
-	global $processInstancesApiInstance;
-
-	$requestArray = array(
-		'process_definition_id' => $process_definition_id,
-		'business_key' => $business_key
-	);
-	$body = new \Swagger\Client\Model\ProcessInstanceCreateRequest($requestArray); // \Swagger\Client\Model\ProcessInstanceCreateRequest |
-
-	// attempt to create instance for process
-	try {
-		$result = $processInstancesApiInstance->createProcessInstance($body);
-		// get instance ID
-		$process_instance_id = $result->getId();
-		print_r($process_instance_id);
-		return $process_instance_id;
-
-	} catch (Exception $e) {
-		echo 'Exception when calling ProcessInstancesApi->createProcessInstance: ', $e->getMessage(), PHP_EOL;
-		return null;
-	}
+// optional query params as filters
+function get_all_tasks($filters = []) {
+    global $client;
+    $res = $client->get('task', [
+        'query' => $filters
+    ]);
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_check_for_input_required($process_instance_id) {
-	global $tasksApiInstance;
-	try {
-		$result = $tasksApiInstance->getTasks(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $process_instance_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-		// print("PRINT TASKS CONNECTED TO PROCESS INSTANCE");
-		$task_id = $result['data'][0]->id;
-		$task_name = $result['data'][0]->name;
-		$taskDefinitionKey = $result['data'][0]->taskDefinitionKey;
-		print_r($result['data'][0]);
-		return $task_id;
-
-	} catch (Exception $e) {
-		// echo 'Exception when calling TasksApi->getTasks: ', $e->getMessage(), PHP_EOL;
-		echo "Nope, not yet.";
-		return null;
-	}
+// get a single tasks
+function get_task_by_id($id) {
+    global $client;
+    $res = $client->get('task/' . $id);
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-
-//TODO J&C
-function ausleihverwaltung_answer_input_required_resources($task_id, $process_definition_id,
-$resName, $resDescription, $resSerNumber, $resInvNumber,$resComment,$resStatus,$resAmount,$resType,$resMainCategory,$resSubCategory) {
-	global $formsApiInstance;
-
-	$formArray = array(
-		'action' => 'submit',
-		'task_id' => $task_id,
-		'process_definition_id' => $process_definition_id,
-		'properties' => array(
-			array(
-				'id' => 'name',
-				'value' => $resName
-			),
-			array(
-				'id' => 'description',
-				'value' => $resDescription
-			),
-			array(
-				'id' => 'serialnumber',
-				'value' => $resSerNumber
-			),
-			array(
-				'id' => 'inventorynumber',
-				'value' => $resInvNumber
-			),
-			array(
-				'id' => 'comment',
-				'value' => $resComment
-			),
-			array(
-				'id' => 'status',
-				'value' => $resStatus
-			),
-			array(
-				'id' => 'amount',
-				'value' => $resAmount
-			),
-			array(
-				'id' => 'type',
-				'value' => $resType
-			),
-			array(
-				'id' => 'maincategory',
-				'value' => $resMainCategory
-			),
-			array(
-				'id' => 'subcategory',
-				'value' => $resSubCategory
-			)
-		)
-	);
-
-	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest |
-
-	try {
-		$result = $formsApiInstance->submitForm($body);
-		//print_r($result);
-		return $result;
-	} catch (Exception $e) {
-		echo 'Exception when calling FormsApi->submitForm: ', $e->getMessage(), PHP_EOL;
-		return null;
-	}
+function get_all_task_variables_by_id($id) {
+    global $client;
+    $res = $client->get('task/' . $id . '/variables');
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
-	global $formsApiInstance;
-
-	$formArray = array(
-		action => "submit",
-		task_id => $task_id,
-		process_definition_id => $process_definition_id,
-		properties => array(
-			array(
-				id => new_property_1,
-				value => $value1
-			),
-			array(
-				id => new_property_2,
-				value => $value2
-			)
-		)
-	);
-
-	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest |
-
-	try {
-		$result = $formsApiInstance->submitForm($body);
-		print_r($result);
-		return $result;
-	} catch (Exception $e) {
-		echo 'Exception when calling FormsApi->submitForm: ', $e->getMessage(), PHP_EOL;
-		return null;
-	}
+function complete_task($id, $variables) {
+    global $client;
+    $task_url = 'task/' . $id . '/complete';
+    $res = $client->post($task_url, [
+        GuzzleHttp\RequestOptions::JSON =>
+            ['variables' => $variables]
+    ]);
+    $body = $res->getBody();
+    $data = json_decode($body, true);
+    return ($data);
 }
-
-function ausleihverwaltung_get_process_instance_status($process_instance_id) {
-	global $processInstancesApiInstance;
-
-	try {
-		$result = $processInstancesApiInstance->getProcessInstance($process_instance_id);
-		print("PRINT INFO ABOUT PROCESS INSTANCE");
-		print_r($result);
-		return $result;
-
-	} catch (Exception $e) {
-		echo 'Exception when calling ProcessInstancesApi->getProcessInstance: ', $e->getMessage(), PHP_EOL;
-		return null;
-	}
+//======================================================================
+// VARIABLE TYPE HELPERS FOR CAMUNDA
+//======================================================================
+require_once(__DIR__ . '/classes/camunda/camunda_var.php');
+function camunda_string($value) {
+    return new camunda_var($value, 'string');
 }
-
-require_once($CFG->dirroot.'/lib/moodlelib.php');
-require_once($CFG->dirroot.'/config.php');
-
-function mail_to($email, $name, $subject, $message) {
-	global $DB;
-
-	$from = new stdClass();
-    $from->firstname = 'sWIm15';
-    $from->lastname  = '';
-    $from->firstnamephonetic = '';
-    $from->lastnamephonetic = '';
-    $from->middlename = '';
-    $from->alternatename = '';
-    $from->email     = 'swim15.noreply@gmail.com';
-    $from->maildisplay = true;
-    $from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
-
-	$emailsubject = $subject;
-	$emailmessage = $message;
-
-	$user = $DB->get_record('user', ['email' => $email]);
-
-	if (!isset($user) or empty($user['email'])) {
-		$user = generate_dummy_user($email, $name);
-	}
-
-	$success = email_to_user($user, $from, $emailsubject, $emailmessage);
-
-	return $success;
+function camunda_int($value) {
+    return new camunda_var($value, 'integer');
 }
-
-function generate_dummy_user($email, $name = '', $id = -99) {
-	$emailuser = new stdClass();
-	$emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL));
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$emailuser->email = '';
-		}
-	$name = format_text($name, FORMAT_HTML, array('trusted' => false, 'noclean' => false));
-	$emailuser->firstname = trim(filter_var($name, FILTER_SANITIZE_STRING));
-	$emailuser->lastname = '';
-	$emailuser->maildisplay = true;
-	$emailuser->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
-	$emailuser->id = $id;
-	$emailuser->firstnamephonetic = '';
-	$emailuser->lastnamephonetic = '';
-	$emailuser->middlename = '';
-	$emailuser->alternatename = '';
-
-	return $emailuser;
-	}
-
-require_once($CFG->dirroot.'/lib/tcpdf/tcpdf.php');
-
-function prep_leihschein($borrowedid) {
-
-	global $DB;
-
-	$borrowedMeta = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
-	$borrowedResource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$borrowedMeta->resourceid));
-
-	$today = date("d-m-y");
-
-	$duedateepoch = $borrowedMeta->duedate;
-	$duedate = new DateTime("@$duedateepoch");
-	$duedate = $duedate->format('d-m-Y');
-
-	//Ressourcentabelle erstellen:
-	$table = "<table><tr><th>ID</th><th>Menge</th><th>Artikel</th><th>Anmerkungen</th></tr>";
-	$table .= "<tr><td>" . $borrowedResource->id. "</td><td><p>1</p></td><td>" . $borrowedResource->name. "</td><td>" . $borrowedResource->defect. "</td></tr></table>";
-
-
-    $ausleihantrag = array(
-    '%Name' => $borrowedMeta->studentname,
-	'%Matrikel' => $borrowedMeta->studentmatrikelnummer,
-	'%Email' => $borrowedMeta->studentmailaddress,
-	'%Tabelle' => $table,
-    '%Rückgabe' => $duedate,
-    '%Zweck' => $borrowedMeta->borrowreason,
-    '%Datum' => $today,
-    '%Bemerkung' => $borrowedMeta->comment
-	);
-
-    generate_pdf($ausleihantrag, $borrowedid);
-    }
-
-function generate_pdf($replacements, $id) {
-	ob_start();
-	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
-	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'DHBW Mannheim', 'Digitaler Leihschein');
-
-	$html = file_get_contents("leihschein.html");
-	$html = str_replace(array_keys($replacements), $replacements, $html);
-
-	$leihschein->AddPage();
-
-	$leihschein->SetCreator('sWIm15');
-	$leihschein->SetAuthor('DHBW Mannheim');
-	$leihschein->SetTitle('Digitaler Leihschein');
-	$leihschein->SetSubject('');
-	$leihschein->writeHTML($html, true, 0, true, true);
-	$leihschein->setPrintHeader(false);
-	$leihschein->setPrintFooter(false);
-
-	$filename = "leihschein";
-	$filename .= $id;
-	$filename .= ".pdf";
-
-	ob_clean();
-	$leihschein->Output($filename, 'D');
+function camunda_double($value) {
+    return new camunda_var($value, 'double');
 }
-
-function mail_confirm_ausleihantrag($iEmail, $iName, $iAusleihantrag, $iUserrolle){
-	//Erwartet wird Email & Namen des Ausleihenden, die Userrolle(student v teacher v editingteacher)und die Nachricht(Ausleihantrag) als String
-
-	global $DB;
-
-	$emailcontent = "Sehr geehrte Damen und Herren,
-	Es ist ein neuer Ausleihantrag eingangen.
-	Bitte bearbeiten Sie diesen schnellstmöglich.
-    ";
-
-	//Deklarierung der Genehmiger
-	$EmailLaboringenieur = 'qtn@live.de';
-	$EmailStudiengangsleitung ='Studiengangsleitung@dhbw-mannheim.de';
-
-		if (strpos($iUserrolle, 'student') == true){
-				//Benachrichtigung Studentische Ausleihe
-				mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
-				mail_to($EmailStudiengangsleitung,'Studiengangsleitung','Eingang Ausleihantrag Student',$emailcontent);
-				mail_to($EmailLaboringenieur,'Laboringenieur','Eingang Ausleihantrag Student',$emailcontent);
-		}
-		if(strpos($iUserrolle, 'teacher') == true){
-				//Benachrichtigung Dozenten Ausleihe
-				mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
-				mail_to($EmailLaboringenieur,'Laboringenieur','Eingang Ausleihantrag Dozenten',$emailcontent);
-		}
-		else{
-			//Benachrichtigung externe Ausleihe
-			mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
-			mail_to($EmailLaboringenieur,'Laboringenieur','Eingang eines externen Ausleihantrags',$emailcontent);
-		}
-
-	//Persistente Speicherung der Emailadresse und der Nachricht/Ausleihantrags in der DB
-	$record = new stdClass();
-	$record->email        = $iEmail;
-	$record->message = $iAusleihantrag;
-	$lastinsertid = $DB->insert_record('ausleihverwaltung_email', $record, $returnid=true, false);
-	}
+function camunda_boolean($value) {
+    return new camunda_var($value, 'boolean');
+}
+function camunda_date($iso_date_string) {
+    return new camunda_var($iso_date_string, 'date');
+}
+// convert epoch timestamp to ISO format (1561417200 -> 2019-06-25T00:00:00.000+0000)
+function epoch_to_iso_date($epoch_timestamp) {
+    return strftime('%Y-%m-%dT%H:%M:%S.000+0000', $epoch_timestamp);
+}
+function camunda_date_from_form($epoch_timestamp) {
+    $iso_date_string = epoch_to_iso_date($epoch_timestamp);
+    return camunda_date($iso_date_string);
+}

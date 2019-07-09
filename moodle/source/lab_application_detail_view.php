@@ -77,7 +77,7 @@ if ($taskid) {
         'taskid' => $taskid,
         "name" => $variables['stdnt_firstname']['value'],
         "matr" => $variables['stdnt_id']['value'],
-        "email" => $variables['stdnt_email']['value'],
+        "email" => $variables['stdnt_mail']['value'],
         "date" => $return,
         "resource" => $variables['resource_name']['value'],
         "reason" => $variables['stdnt_reason']['value'],
@@ -94,7 +94,7 @@ if ($mform->is_cancelled()) {
     //Handle form successful operation, if button is present on form
     //redirect(new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id)));
 
-    $url = $camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_complete_api;
+    /*$url = $camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_complete_api;
 
     //Create a client
     $client = new GuzzleHttp\Client();
@@ -108,21 +108,64 @@ if ($mform->is_cancelled()) {
             ]
         ]
     );
-    $code = $response->getStatusCode();
+    $code = $response->getStatusCode();*/
 
     $pdf = new PDF();
-    $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_email']['value']);
+    $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_mail']['value']);
     $pdf->Signatures(date("Y-m-d"));
 
     $pdfString = $pdf->Output("", "S");
 
     $SESSION->pdf = $pdfString;
 
+    $url = 'https://hardware-rental.moodle-dhbw.de/webservice/restjson/server.php';
+
+    $data = array("wstoken" => 'cf9d830b64c888d67d3e893821f8d711',
+        "wsfunction" => "local_digitalsignature_createEnvelope",
+        "pdfDocument" => $pdfString,
+        "documentName" => 'Antrag.pdf',
+        "returnUrl" => 'https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25',
+            "signers" => array(
+            array(
+                "email" => $variables['stdnt_mail']['value'],
+                "firstname" => $variables['stdnt_firstname']['value'],
+                "lastname" => $variables['stdnt_lastname']['value'],
+                "tabs" => array (
+                        array (
+                            "type" => "Signature",
+                            "xPos" => "394",
+                            "yPosition" => "187",
+                            "page" => "1",
+                        ),
+                        array (
+                            "type" => "Date",
+                            "xPos" => "119",
+                            "yPos" => "220",
+                            "page" => "1",
+                        )
+                )
+            )
+        ),
+        "moodlewsrestformat" => "json",
+    );
+    $data_string = json_encode($data);
+
+
+    $client = new GuzzleHttp\Client();
+    $response = $client->post($url,
+        [GuzzleHttp\RequestOptions::JSON =>
+            $data_string
+        ]
+    );
+    $code = $response;
+    echo($code->getStatusCode());
+    echo($code->getBody());
+
     // Redirect to the course result page.
     $returnurl = new moodle_url('../ausleihverwaltung/pdf_test.php', array('id' => $cm->id));
     //$returnurl = new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
     //redirect($returnurl);
-    redirect($returnurl);
+    //redirect($returnurl);
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
     // or on the first display of the form.

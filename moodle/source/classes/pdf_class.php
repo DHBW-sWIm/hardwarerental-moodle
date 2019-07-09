@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '../pdf/fpdf.php');
+require_once('/bitnami/moodle/mod/ausleihverwaltung/pdf/fpdf.php');
 
 class PDF extends FPDF
 {

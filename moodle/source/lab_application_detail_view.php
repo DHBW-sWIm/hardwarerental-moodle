@@ -100,7 +100,7 @@ if ($mform->is_cancelled()) {
     $client = new GuzzleHttp\Client();
     // Send HTTP POST and use class camunda_var
     //TODO: make easy to use standard & document
-    include("camunda_var.php");
+    include("./classes/camunda/camunda_var.php");
     $response = $client->post($url,
         [GuzzleHttp\RequestOptions::JSON =>
             ['variables' => [

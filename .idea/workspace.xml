@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0735febe-206a-4e95-8d1c-931da427acaf" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/moodle/source/forms/lab_resourceBulkDetailForm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moodle/source/forms/stdnt_availableResourceBulkForm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moodle/source/lab_resourcedetail_bulk_view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moodle/source/stdnt_available_resourceBulk_detail_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camunda/.idea/artifacts/bpx_mvp_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/camunda/.idea/artifacts/bpx_mvp_war.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camunda/.idea/artifacts/bpx_mvp_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/camunda/.idea/artifacts/bpx_mvp_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camunda/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/camunda/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/.ini" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/forms/availableResourceForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/forms/stdnt_availableResourceForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/forms/stdnt_antragForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/forms/stdnt_antragForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/lab_new_resource_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/lab_new_resource_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_detail_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_detail_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,37 +18,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php">
+        <entry file="file://$PROJECT_DIR$/moodle/source/lab_new_resource_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="143" column="60" selection-start-line="143" selection-start-column="60" selection-end-line="143" selection-end-column="60" />
+            <state relative-caret-position="489">
+              <caret line="83" column="33" lean-forward="true" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/moodle/source/lab_pieceMaterial_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="835">
+              <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="66" column="1" lean-forward="true" selection-start-line="61" selection-end-line="66" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="781">
+              <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php">
+        <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="100" column="26" lean-forward="true" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/moodle/source/lab_application_detail_view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+            <state relative-caret-position="319">
+              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -172,22 +164,22 @@
         <option value="$PROJECT_DIR$/moodle/source/stdnt_resourceBulk_detail_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/stdnt_avaliable_resourceBulk_detail_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/forms/stdnt_antragForm.php" />
-        <option value="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/stdnt_available_resource_detail_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/forms/stdnt_availableResourceBulkForm.php" />
         <option value="$PROJECT_DIR$/moodle/source/stdnt_available_resourceBulk_detail_view.php" />
-        <option value="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php" />
         <option value="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" />
         <option value="$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php" />
+        <option value="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" />
+        <option value="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1965" />
-    <option name="y" value="-25" />
+    <option name="x" value="-1602" />
+    <option name="y" value="-11" />
     <option name="width" value="1292" />
     <option name="height" value="540" />
   </component>
@@ -217,13 +209,6 @@
               <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
               <item name="moodle" type="462c0819:PsiDirectoryNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="moodle" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="forms" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -293,18 +278,20 @@
       <workItem from="1560935171264" duration="4548000" />
       <workItem from="1561062844979" duration="819000" />
       <workItem from="1561964374487" duration="282000" />
-      <workItem from="1561969757441" duration="15642000" />
+      <workItem from="1561969757441" duration="16490000" />
+      <workItem from="1562579461150" duration="922000" />
+      <workItem from="1562659743406" duration="1051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241079000" />
+    <option name="totallyTimeSpent" value="243900000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15778251" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -316,7 +303,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.055062167" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.068255685" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -377,13 +364,6 @@
     <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_resource_view.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_pieceMaterial_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="102" column="23" lean-forward="true" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/forms/lab_newResourceForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -433,20 +413,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="111" column="88" selection-start-line="111" selection-start-column="88" selection-end-line="111" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_new_resource_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="94" column="59" lean-forward="true" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/forms/stdnt_availableResourceBulkForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
@@ -475,27 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="83" column="12" lean-forward="true" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="53" column="73" lean-forward="true" selection-start-line="53" selection-start-column="73" selection-end-line="53" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/forms/stdnt_antragForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -503,24 +448,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="143" column="60" selection-start-line="143" selection-start-column="60" selection-end-line="143" selection-end-column="60" />
+        <state relative-caret-position="129">
+          <caret line="90" column="60" selection-start-line="90" selection-start-column="60" selection-end-line="90" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/forms/lab_applicationDetailForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="778">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/lab_application_detail_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
+        <state relative-caret-position="481">
+          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php">
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_new_resource_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="100" column="26" lean-forward="true" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
+        <state relative-caret-position="489">
+          <caret line="83" column="33" lean-forward="true" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="66" column="1" lean-forward="true" selection-start-line="61" selection-end-line="66" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_pieceMaterial_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="835">
+          <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
         </state>
       </provider>
     </entry>

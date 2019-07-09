@@ -73,7 +73,7 @@ $lastName = 'Stemberg';
 
 require(dirname(__FILE__).'/pdf/fpdf.php');
 
-class PDF extends FPDF
+class Test extends FPDF
 {
 // Page header
     function Header()
@@ -208,7 +208,7 @@ class PDF extends FPDF
     }
 }
 
-$pdf = new PDF();
+$pdf = new Test();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 

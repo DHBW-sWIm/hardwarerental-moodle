@@ -56,7 +56,7 @@ foreach ($tasks as $task) {
     print_r($task);
     //$table->data[] = array($task["name"], $variables['stdnt_firstname']['value'], $date, $variables['resource_name']['value'], $detailButton);
 }
-echo "<textarea>";
+echo "</textarea>";
 //Tabelle ausgeben
 echo html_writer::table($table);
 

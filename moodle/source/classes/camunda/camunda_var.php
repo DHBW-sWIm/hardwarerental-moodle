@@ -1,8 +1,8 @@
 <?php
-class camunda_var {
+class camunda_variable {
     var $value;
     var $type;
-    /**
+    /**1
      * CamundaVar constructor.
      *
      * @param $value

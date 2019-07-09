@@ -104,7 +104,7 @@ if ($mform->is_cancelled()) {
     $response = $client->post($url,
         [GuzzleHttp\RequestOptions::JSON =>
             ['variables' => [
-                'DHBW_approval' => new camunda_var(true, 'boolean'),
+                'DHBW_approval' => new camunda_variable(true, 'boolean'),
             ]
             ]
         ]

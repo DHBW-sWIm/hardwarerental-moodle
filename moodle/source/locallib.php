@@ -115,19 +115,19 @@ function complete_task($id, $variables) {
 //======================================================================
 require_once(__DIR__ . '/classes/camunda/camunda_var.php');
 function camunda_string($value) {
-    return new camunda_var($value, 'string');
+    return new camunda_variable($value, 'string');
 }
 function camunda_int($value) {
-    return new camunda_var($value, 'integer');
+    return new camunda_variable($value, 'integer');
 }
 function camunda_double($value) {
-    return new camunda_var($value, 'double');
+    return new camunda_variable($value, 'double');
 }
 function camunda_boolean($value) {
-    return new camunda_var($value, 'boolean');
+    return new camunda_variable($value, 'boolean');
 }
 function camunda_date($iso_date_string) {
-    return new camunda_var($iso_date_string, 'date');
+    return new camunda_variable($iso_date_string, 'date');
 }
 // convert epoch timestamp to ISO format (1561417200 -> 2019-06-25T00:00:00.000+0000)
 function epoch_to_iso_date($epoch_timestamp) {

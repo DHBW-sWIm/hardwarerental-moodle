@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efe347ca-8b3a-451a-b5a8-660994f58622" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/moodle/source/camunda_var.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moodle/source/locallib.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/locallib.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,11 +42,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/camunda/src/main/java/moodle/CamundaBpmProcessApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-254" />
@@ -65,8 +61,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>camunda_var</find>
       <find>include(&quot;</find>
+      <find>camunda_var</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\NiklasStemberg\Moodle\Moodle\Ausleihverwaltung-master\camunda</dir>
@@ -79,8 +75,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" />
+        <option value="$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php" />
         <option value="$PROJECT_DIR$/moodle/source/lab_application_detail_view.php" />
+        <option value="$PROJECT_DIR$/moodle/source/locallib.php" />
+        <option value="$PROJECT_DIR$/moodle/source/stdnt_rentalapplication_view.php" />
       </list>
     </option>
   </component>
@@ -102,41 +100,6 @@
             <path>
               <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="moodle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
               <item name="moodle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -144,21 +107,6 @@
               <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
               <item name="moodle" type="462c0819:PsiDirectoryNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="moodle" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ausleihverwaltung-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ausleihverwaltung-master" type="462c0819:PsiDirectoryNode" />
-              <item name="moodle" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="camunda" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -222,11 +170,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="259654000" />
+    <option name="totallyTimeSpent" value="260072000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17327935" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -240,7 +187,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49959514" weight="0.22912966" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49959514" visible="true" weight="0.22912966" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50040483" side_tool="true" weight="0.37477797" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -483,20 +430,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19">
-          <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/pdf_test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/classes/camunda/camunda_var.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_applicationlist_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
         </state>
       </provider>
     </entry>

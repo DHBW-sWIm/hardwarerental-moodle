@@ -37,10 +37,10 @@ global $SESSION;
 do_header('/mod/ausleihverwaltung/stdnt_available_resource_view.php');
 
 // Output starts here.
-echo $OUTPUT->header();
+/*echo $OUTPUT->header();
 
 $strName = "Available Resources:";
-echo $OUTPUT->heading($strName);
+echo $OUTPUT->heading($strName);*/
 
 echo '<br>';
 

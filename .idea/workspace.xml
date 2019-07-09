@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0735febe-206a-4e95-8d1c-931da427acaf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php" afterDir="false" />
     </list>
@@ -38,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
+            <state relative-caret-position="471">
               <caret line="66" column="1" lean-forward="true" selection-start-line="61" selection-end-line="66" selection-end-column="1" />
             </state>
           </provider>
@@ -47,17 +46,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="781">
-              <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
+            <state relative-caret-position="-328">
+              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+              <folding>
+                <element signature="e#6#57#0#PHP" expanded="true" />
+              </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/moodle/source/view_init.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-430" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+            <state relative-caret-position="130">
+              <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -66,7 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Core_dat</find>
       <find>get_data</find>
       <find>includes</find>
       <find>$id</find>
@@ -96,6 +104,7 @@
       <find>FONT_PA</find>
       <find>FONTPATH</find>
       <find>FPDF_VERSION</find>
+      <find>moodle_page</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -115,6 +124,7 @@
       <dir>C:\Users\NiklasStemberg\Downloads\Ausleihverwaltung-master\Ausleihverwaltung-master\source</dir>
       <dir>C:\Users\NiklasStemberg\Downloads\Moodle\Ausleihverwaltung-master\source</dir>
       <dir>C:\Users\NiklasStemberg\Moodle\Moodle\Ausleihverwaltung-master\source</dir>
+      <dir>C:\Users\NiklasStemberg\Moodle\Moodle\Ausleihverwaltung-master\moodle\source</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -280,18 +290,18 @@
       <workItem from="1561964374487" duration="282000" />
       <workItem from="1561969757441" duration="16490000" />
       <workItem from="1562579461150" duration="922000" />
-      <workItem from="1562659743406" duration="1051000" />
+      <workItem from="1562659743406" duration="2825000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="243900000" />
+    <option name="totallyTimeSpent" value="245674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -302,8 +312,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.068255685" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.21668473" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -316,7 +326,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.project" />
     <entry file="file://$PROJECT_DIR$/.editorconfig" />
     <entry file="file://$PROJECT_DIR$/source/lab_resourcedetail_view.php" />
     <entry file="file://$PROJECT_DIR$/source/lib/composer/ClassLoader.php" />
@@ -483,13 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="66" column="1" lean-forward="true" selection-start-line="61" selection-end-line="66" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/lab_pieceMaterial_view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="835">
@@ -497,17 +499,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/view_init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-430" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moodle/source/lab_resourcelist_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="66" column="1" lean-forward="true" selection-start-line="61" selection-end-line="66" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_available_resource_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
+        <state relative-caret-position="-328">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="e#6#57#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/moodle/source/stdnt_applicationlist_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+        <state relative-caret-position="130">
+          <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
         </state>
       </provider>
     </entry>

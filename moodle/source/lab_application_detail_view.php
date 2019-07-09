@@ -63,9 +63,9 @@ $data = array();
 
 if ($taskid) {
     //Create a client
-    $client = new GuzzleHttp\Client();
+    $client2 = new GuzzleHttp\Client();
     // Send a request
-    $response = $client->get($camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_variables_api);
+    $response = $client2->get($camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_variables_api);
 
     $body = $response->getBody();
     $variables = json_decode($body, true);
@@ -91,8 +91,7 @@ if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
     redirect(new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
-    //Handle form successful operation, if button is present on form
-    //redirect(new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id)));
+    $client3 = new GuzzleHttp\Client();
 
     /*$url = $camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_complete_api;
 
@@ -120,41 +119,17 @@ if ($mform->is_cancelled()) {
 
     $url = 'https://hardware-rental.moodle-dhbw.de/webservice/restjson/server.php';
 
+
+    $response = start_process('hardwarerental-signature', [
+        'stdnt_name' => camunda_string($variables['stdnt_firstname']['value'] . " " . $variables['stdnt_lastname']['value']),
+        'stdnt_mail' => camunda_string($variables['stdnt_mail']['value'])
+    ]);
+
+    $response2 = get_all_tasks(['processInstanceId' => $response['id']]);
+
     $base_pdf = base64_encode($pdfString);
 
-    /*$data = array(
-        "wstoken" => "a57ddc480bf214b4d6be20263ab8fe00",
-        "wsfunction" => "local_digitalsignature_createEnvelope",
-        "pdfDocument" => $base_pdf,
-        "documentName" => "Antrag.pdf",
-        "returnUrl" => "https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25",
-        "signers" => array(
-            array(
-                "email" => $variables['stdnt_mail']['value'],
-                "firstname" => $variables['stdnt_firstname']['value'],
-                "lastname" => $variables['stdnt_lastname']['value'],
-                "tabs" => array (
-                    array (
-                        "type" => "Signature",
-                        "xPos" => "394",
-                        "yPosition" => "187",
-                        "page" => "1"
-                    ),
-                    array (
-                        "type" => "Date",
-                        "xPos" => "119",
-                        "yPos" => "220",
-                        "page" => "1"
-                    )
-                )
-            )
-        ),
-        "moodlewsrestformat" => "json",
-    );
-    $data_string = json_encode($data);*/
-
-    $client = new GuzzleHttp\Client();
-    $response = $client->post($url,
+    $response3 = $client3->post($url,
         [GuzzleHttp\RequestOptions::JSON =>
             [
                 "wstoken" => "a57ddc480bf214b4d6be20263ab8fe00",
@@ -187,10 +162,12 @@ if ($mform->is_cancelled()) {
             ]
         ]
     );
-    $code = $response;
-    //echo($data_string);
-    echo($code->getStatusCode());
-    echo($code->getBody());
+
+    $response4 = complete_task($response2[0]['id'], ['docusign_link' => camunda_string($response3->getBody())]);
+
+    print_r($response4);
+    print($response2[0]['id']);
+    print($response3->getBody());
 
     // Redirect to the course result page.
     $returnurl = new moodle_url('../ausleihverwaltung/pdf_test.php', array('id' => $cm->id));

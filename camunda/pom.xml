@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>moodle</groupId>
-  <artifactId>bpx-integration</artifactId>
+  <artifactId>bpx-mvp</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <packaging>war</packaging>
@@ -140,11 +140,11 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- To enable sendgrid API -->
+    <!-- To send out Mails -->
     <dependency>
-      <groupId>com.sendgrid</groupId>
-      <artifactId>sendgrid-java</artifactId>
-      <version>4.3.0</version>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
     </dependency>
 
     <!-- Add your own dependencies here, if in compile scope, they are added to the war -->
@@ -204,9 +204,10 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
         <configuration>
-          <url>http://localhost:8080/manager/text</url>
-          <username>admin</username>
-          <password>admin</password>
+          <!--<url>http://localhost:8080/manager/text</url>-->
+          <url>https://tomcat.hardware-rental.moodle-dhbw.de/manager/text</url>
+          <username>swim</username>
+          <password>!swim-access?</password>
         </configuration>
       </plugin>
       <plugin>

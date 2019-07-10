@@ -36,7 +36,7 @@ class stdntApplicationDetailForm extends moodleform {
         /* ****************** QUANTITY *************/
         $mform->addElement('static', 'quantity', 'Quantity:');
         $mform->setType('quantity', PARAM_INT);
-        $mform->setDefault('quantity', '0');
+        $mform->setDefault('quantity', '1');
 
         /* ****************** DATE *************/
         $mform->addElement('static', 'assignee', 'Responsible:');

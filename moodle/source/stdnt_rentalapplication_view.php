@@ -50,7 +50,7 @@ $mform->render();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-    redirect(new moodle_url('../ausleihverwaltung/stdnt_available_resourcedetail_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('../ausleihverwaltung/stdnt_available_resource_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
     $resource = new stdClass();

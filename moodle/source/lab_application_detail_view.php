@@ -88,6 +88,7 @@ if ($taskid) {
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
+    $response6 = complete_task($taskid, ['application_approval' => new camunda_variable(false, 'boolean')]);
     redirect(new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
     $client3 = new GuzzleHttp\Client();

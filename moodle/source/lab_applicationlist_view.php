@@ -58,7 +58,7 @@ $tasks = json_decode($body, true);
 
 //Tabelle mit camunda
 $table = new html_table();
-$table->head = array('Anfrage', 'Student', 'Vom', 'Gerät', '');
+$table->head = array('Request', 'Student', 'Request Date', 'Resource', '');
 //Für jeden Datensatz
 foreach ($tasks as $task) {
     $taskId = $task['id'];
@@ -74,7 +74,7 @@ foreach ($tasks as $task) {
     //Link zum löschen des Verantwortlichen in foreach-Schleife setzen
     $detailButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_application_detail_view.php', array('id' => $cm->id, 'taskid' => $taskId)), 'Details', $attributes = null);
     //Daten zuweisen an HTML-Tabelle
-    $table->data[] = array($name, $variables['stdnt_firstname']['value']." ".$variables['stdnt_lastname']['value'], $date, $variables['resource_name']['value'], $detailButton);
+    $table->data[] = array($name, ($variables['stdnt_firstname']['value'] . ", " . $variables['stdnt_lastname']['value']), $date, $variables['resource_name']['value'], $detailButton);
 }
 //Tabelle ausgeben
 echo html_writer::table($table);

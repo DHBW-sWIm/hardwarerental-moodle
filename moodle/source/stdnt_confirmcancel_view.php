@@ -34,6 +34,8 @@ require_once(dirname(__FILE__)."/view_init.php");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
+$applicationid = optional_param('applicationid', 0, PARAM_INT);
+
 $strName = "Your application is revoked";
 echo $OUTPUT->heading($strName);
 

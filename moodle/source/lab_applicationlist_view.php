@@ -36,7 +36,7 @@ if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
-$strName = "Vorhandene Anfragen:";
+$strName = "Open Requests:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';

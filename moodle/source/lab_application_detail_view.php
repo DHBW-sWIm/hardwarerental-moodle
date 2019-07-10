@@ -48,7 +48,7 @@ $taskid = optional_param('taskid', 0, PARAM_NOTAGS); // Task ID
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 
-$strName = "Antragsdetails";
+$strName = "Request Details:";
 echo $OUTPUT->heading($strName);
 
 

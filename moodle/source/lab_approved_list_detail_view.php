@@ -46,10 +46,10 @@ echo '<br>';
 $taskvars = get_all_task_variables_by_id($taskid);
 
 echo "Borrower name: ".$taskvars['stdnt_name']['value']."<br>";
-echo "Borrower email: ".$taskvars['stdnt_mail']['value']."<br>";
+echo "Borrower email: ".$taskvars['stdnt_mail']['value']."<br><br>";
 
 
-echo "<a href=".$taskvars['docusign_link']['value']."><button>To Signature Process</button></a>";
+echo "<a href=".$taskvars['docusign_link']['value']."><button class='btn btn-secondary'>To Signature Process</button></a><br><br>";
 
 
 echo $OUTPUT->single_button(

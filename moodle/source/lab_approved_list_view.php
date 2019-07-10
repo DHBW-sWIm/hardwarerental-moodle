@@ -42,7 +42,7 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 
-echo $OUTPUT->heading("Successfully completed the signature process");
+echo $OUTPUT->heading("Documents for signature");
 echo '<br>';
 
 $tasks = get_tasks_by_key("hardwarerental.signature");
@@ -52,8 +52,9 @@ $table = new html_table();
 $table->head = array('ProcessID', 'Student', '');
 //Für jeden Datensatz
 foreach ($tasks as $task) {
+    $name = get_all_task_variables_by_id($task['id'])['stdnt_name']['value'];
     $detailButton = $OUTPUT->single_button(new moodle_url('./lab_approved_list_detail_view.php', array('id' => $cm->id, 'taskid' => $task['id'])), 'Details', $attributes = null);
-    $table->data[] = array($task["id"], "", $detailButton);
+    $table->data[] = array($task["id"], $name, $detailButton);
 }
 //Tabelle ausgeben
 echo html_writer::table($table);

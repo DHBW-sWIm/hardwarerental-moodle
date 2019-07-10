@@ -156,15 +156,13 @@ if ($mform->is_cancelled()) {
     $docusignLink = str_replace(array('"', '\\'), '', $response3->getBody());
 
     $response4 = complete_task($response2[0]['id'], ['docusign_link' => camunda_string($docusignLink)]);
-
-    print_r($response4);
-    print($response2[0]['id']);
-    print($docusignLink);
+    //print_r($response4);
+    //print($response2[0]['id']);
+    //print($docusignLink);
 
     // Redirect to the course result page.
-    $returnurl = new moodle_url('../ausleihverwaltung/pdf_test.php', array('id' => $cm->id));
-    //$returnurl = new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
-    //redirect($returnurl);
+    $returnurl = new moodle_url('../ausleihverwaltung/lab_applicationlist_view.php', array('id' => $cm->id));
+    redirect($returnurl);
     //redirect($returnurl);
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed

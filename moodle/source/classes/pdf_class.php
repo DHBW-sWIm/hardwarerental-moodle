@@ -66,6 +66,10 @@ class PDF extends FPDF
     }
     function Resources($resources)
     {
+        $this->SetFont('Arial','B',12);
+        $this->Cell(80,10,'Borrowed articles:', 'B', 1);
+// Line break
+        $this->Ln(2);
         $this->Cell(10, 7, 'Pos.', 1);
         $this->Cell(20, 7, 'Amount', 1);
         $this->Cell(50, 7, 'Resource', 1);
@@ -126,10 +130,6 @@ class PDF extends FPDF
 
     function Signatures($date)
     {
-        $this->SetFont('Arial','B',12);
-        $this->Cell(80,10,'Borrowed articles:', 'B', 1);
-// Line break
-        $this->Ln(2);
 
         $this->SetFont('Arial','',10);
         $this->Ln(2);

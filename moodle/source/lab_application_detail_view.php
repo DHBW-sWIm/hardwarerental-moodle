@@ -85,7 +85,6 @@ if ($taskid) {
     );
 }
 
-
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
@@ -126,6 +125,7 @@ if ($mform->is_cancelled()) {
         'stdnt_mail' => camunda_string($variables['stdnt_mail']['value'])
     ]);
 
+
     $response2 = get_all_tasks(['processInstanceId' => $response['id']]);
 
     $base_pdf = base64_encode($pdfString);
@@ -137,7 +137,7 @@ if ($mform->is_cancelled()) {
                 "wsfunction" => "local_digitalsignature_createEnvelope",
                 "pdfDocument" => $base_pdf,
                 "documentName" => "Antrag.pdf",
-                "returnUrl" => "https://hardware-rental.moodle-dhbw.de/mod/ausleihverwaltung/view.php?id=25",
+                "returnUrl" => dirname("https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}")."/lab_postsignature_view.php?id=".$cm->id."&taskid=".$response['id'],
                 "signers" => [
                     [
                         "email" => $variables['stdnt_mail']['value'],

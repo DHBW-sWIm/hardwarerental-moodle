@@ -49,10 +49,7 @@ echo "Borrower name: ".$taskvars['stdnt_name']['value'];
 echo "Borrower email: ".$taskvars['stdnt_mail']['value'];
 
 
-echo $OUTPUT->single_button(
-    new moodle_url($taskvars['docusign_link']['value']),
-    "To document signature"
-);
+echo "<a href=".$taskvars['docusign_link']['value']."><button>To Signature Process</button></a>";
 
 
 echo $OUTPUT->single_button(

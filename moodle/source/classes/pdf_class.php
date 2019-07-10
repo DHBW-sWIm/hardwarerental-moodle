@@ -64,7 +64,7 @@ class PDF extends FPDF
         $this->Cell(40, 7, $email, 'B');
         $this->Ln();
     }
-    function Resources()
+    function Resources($resources)
     {
         $this->Cell(10, 7, 'Pos.', 1);
         $this->Cell(20, 7, 'Amount', 1);
@@ -74,11 +74,11 @@ class PDF extends FPDF
         $this->Cell(30, 7, 'Comments', 1);
         $this->Ln();
         $this->Cell(10, 7, '1', 1);
-        $this->Cell(20, 7, '', 1);
-        $this->Cell(50, 7, '', 1);
-        $this->Cell(40, 7, '', 1);
-        $this->Cell(40, 7, '', 1);
-        $this->Cell(30, 7, '', 1);
+        $this->Cell(20, 7, '1', 1);
+        $this->Cell(50, 7, $resources->name, 1);
+        $this->Cell(40, 7, $resources->serial, 1);
+        $this->Cell(40, 7, $resources->inventory_nr, 1);
+        $this->Cell(30, 7, $resources->comment, 1);
         $this->Ln();
         $this->Cell(10, 7, '2', 1);
         $this->Cell(20, 7, '', 1);
@@ -132,7 +132,6 @@ class PDF extends FPDF
         $this->Ln(2);
 
         $this->SetFont('Arial','',10);
-        $this->Resources();
         $this->Ln(2);
 
         $this->SetFont('Arial','B',12);

@@ -92,26 +92,15 @@ if ($mform->is_cancelled()) {
 } else if ($fromform = $mform->get_data()) {
     $client3 = new GuzzleHttp\Client();
 
-    /*$url = $camunda_url . $camunda_task_api . '/' . $taskid . $camunda_task_complete_api;
-
-    //Create a client
-    $client = new GuzzleHttp\Client();
-    $response = $client->post($url,
-        [GuzzleHttp\RequestOptions::JSON =>
-            ['variables' => [
-                'DHBW_approval' => new camunda_variable(true, 'boolean'),
-            ]
-            ]
-        ]
-    );*/
-
-    //$response5 = complete_task($taskid, ['application_approval' => new camunda_variable(true, 'boolean')]);
+    $resourceid = get_all_task_variables_by_id($taskid)['resource_id']['value'];
+    $response5 = complete_task($taskid, ['application_approval' => new camunda_variable(true, 'boolean')]);
 
     //print_r($response5);
 
     $pdf = new PDF();
     $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_mail']['value']);
-    $pdf->Signatures(date("Y-m-d"));
+    $pdf->Signatures("");
+    $pdf->Resources($DB->get_record('hardware_rental_resources',array('id'=>$resourceid)));
 
     $pdfString = $pdf->Output("", "S");
 
@@ -147,13 +136,13 @@ if ($mform->is_cancelled()) {
                             [
                                 "type" => "Signature",
                                 "xPos" => "394",
-                                "yPos" => "187",
+                                "yPos" => "600",
                                 "page" => "1"
                             ],
                             [
                                 "type" => "Date",
                                 "xPos" => "119",
-                                "yPos" => "220",
+                                "yPos" => "620",
                                 "page" => "1"
                             ]
                         ]

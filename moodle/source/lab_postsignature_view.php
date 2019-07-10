@@ -48,7 +48,7 @@ $coc = dirname("https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}")."/pdf
 
 $task = get_all_tasks(['processInstanceId' => $taskid]);
 
-complete_task($task['id'], [
+complete_task($task[0]['id'], [
         'document' => camunda_string($document),
         'coc' => camunda_string($coc)
     ]);

@@ -51,5 +51,11 @@ echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_rentallist_
 echo '<br>';
 echo '<br>';
 
+$strName = "Documents:";
+echo $OUTPUT->heading($strName);
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/lab_approved_list_view.php', array('id' => $cm->id)), 'Show Documents to sign');
+echo '<br>';
+echo '<br>';
+
 // Finish the page.
 echo $OUTPUT->footer();

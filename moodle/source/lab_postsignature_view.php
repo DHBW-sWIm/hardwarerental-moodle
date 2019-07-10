@@ -54,7 +54,7 @@ complete_task($task[0]['id'], [
     ]);
 
 echo $OUTPUT->single_button(
-    new moodle_url('./lab_rentallist_view.php', array('id'=>$cm->id)),
+    new moodle_url('./lab_approved_list_view.php', array('id'=>$cm->id)),
     "Back to the signature list"
 );
 

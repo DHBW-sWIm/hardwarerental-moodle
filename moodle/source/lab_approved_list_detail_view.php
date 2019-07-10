@@ -45,8 +45,8 @@ echo '<br>';
 
 $taskvars = get_all_task_variables_by_id($taskid);
 
-echo "Borrower name: ".$taskvars['stdnt_name']['value'];
-echo "Borrower email: ".$taskvars['stdnt_mail']['value'];
+echo "Borrower name: ".$taskvars['stdnt_name']['value']."<br>";
+echo "Borrower email: ".$taskvars['stdnt_mail']['value']."<br>";
 
 
 echo "<a href=".$taskvars['docusign_link']['value']."><button>To Signature Process</button></a>";

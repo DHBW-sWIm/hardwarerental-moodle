@@ -75,7 +75,7 @@ if ($taskid) {
     $data = array(
         'id' => $cm->id,
         'taskid' => $taskid,
-        "name" => $variables['stdnt_firstname']['value'],
+        "name" => $variables['stdnt_firstname']['value']." ".$variables['stdnt_lastname']['value'],
         "matr" => $variables['stdnt_id']['value'],
         "email" => $variables['stdnt_mail']['value'],
         "date" => $return,

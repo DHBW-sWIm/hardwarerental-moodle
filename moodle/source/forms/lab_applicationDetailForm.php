@@ -9,16 +9,16 @@ class labApplicationDetailForm extends moodleform {
         $mform = $this->_form; // Don't forget the underscore!
 
         /* ****************** ID *************/
-        $mform->addElement('static', 'type', 'Typ:');
+        $mform->addElement('static', 'type', 'Type:');
         $mform->setType('type', PARAM_NOTAGS);
-        $mform->setDefault('type', 'Ausleihantrag');
+        $mform->setDefault('type', 'Rental Application');
 
         /* ****************** NAME *************/
         $mform->addElement('static', 'name', 'Student:');
         $mform->setType('name', PARAM_NOTAGS);
 
         /* ****************** MATRNR *************/
-        $mform->addElement('static', 'matr', 'Matrikelnummer:');
+        $mform->addElement('static', 'matr', 'Marticulation Nr.:');
         $mform->setType('matr', PARAM_NOTAGS);
 
         /* ****************** MATRNR *************/
@@ -30,16 +30,16 @@ class labApplicationDetailForm extends moodleform {
         $mform->setType('resource', PARAM_NOTAGS);
 
         /* ****************** DATE *************/
-        $mform->addElement('static', 'date', 'Rückgabedatum:');
+        $mform->addElement('static', 'date', 'Return date:');
         $mform->setType('date', PARAM_NOTAGS);
         $mform->setDefault('date', '21.05.2019');
 
         /* ****************** QUANTITY *************/
-        $mform->addElement('static', 'reason', 'Ausleihgrund:');
+        $mform->addElement('static', 'reason', 'Reason:');
         $mform->setType('reason', PARAM_NOTAGS);
         $mform->setDefault('reason', '-');
 
-        $mform->addElement('static', 'comment', 'Anmerkung:');
+        $mform->addElement('static', 'comment', 'Note:');
         $mform->setType('comment', PARAM_NOTAGS);
         $mform->setDefault('comment', '-');
 
@@ -49,8 +49,8 @@ class labApplicationDetailForm extends moodleform {
         $mform->addElement('hidden', 'taskid');
         $mform->setType('taskid', PARAM_INT);
 
-        $mform->addElement('submit', 'btnSubmit', 'Akzeptieren');
-        $mform->addElement('cancel', 'cancelBtn', 'Ablehnen');
+        $mform->addElement('submit', 'btnSubmit', 'Accept');
+        $mform->addElement('cancel', 'cancelBtn', 'Reject');
 
     }
     //Custom validation should be added here

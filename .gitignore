@@ -1,6 +1,6 @@
 vendor/
 .php_cs.cache
-*zip
+*.zip
 .idea
 
 .vs/

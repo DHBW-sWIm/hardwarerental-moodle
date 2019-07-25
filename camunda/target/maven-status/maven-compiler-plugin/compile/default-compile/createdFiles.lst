@@ -1,0 +1,9 @@
+moodle\MailMgmtStudentIsIll.class
+moodle\Mail.class
+moodle\LoggerDelegate.class
+moodle\RentalApprovalMail.class
+moodle\RentalDeclineMail.class
+moodle\ServiceFakeDBWrite.class
+moodle\CamundaBpmProcessApplication.class
+moodle\CamundaLogger.class
+moodle\RentalSignatureMail.class

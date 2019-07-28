@@ -61,6 +61,7 @@ if ($mform->is_cancelled()) {
     // Required for module not to crash as a course id is always needed
 
     $application = new stdClass();
+    //data_read: hardware_rental_applications
     foreach($SESSION->applicationList as $item) {
         if ($applicationid == $item->id) {
             $application = $item;

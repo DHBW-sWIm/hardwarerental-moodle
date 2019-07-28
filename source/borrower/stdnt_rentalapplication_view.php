@@ -61,7 +61,7 @@ if ($mform->is_cancelled()) {
             break;
         }
     }*/
-
+    //data_read: hardware_rental_resources
     $resource = $DB->get_record('hardware_rental_resources',array('id'=>$fromform->resourceid));
 
     $appId = rand(1,10000);

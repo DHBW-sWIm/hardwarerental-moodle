@@ -62,6 +62,7 @@ if ($mform->is_cancelled()) {
     // Required for module not to crash as a course id is always needed
 
     $resource = new stdClass();
+    //data_read: hardware_rental_resources
     foreach($SESSION->resourceList as $item) {
         if ($resourceName == $item->name) {
             $resource = $item;

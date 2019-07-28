@@ -42,7 +42,7 @@ $strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
-
+//data_read: hardware_rental_resources
 $resource = $DB->get_record('hardware_rental_resources',array('id'=>$resourceid));
 
 // Implement form for user
@@ -68,9 +68,11 @@ if ($mform->is_cancelled()) {
         'resourceid' => $resourceid,
         'serial' => ''.$resource->serial,
         'name' => $resource->name,
+        //data_read: hardware_rental_manufacturer
         'manufacturer' => $DB->get_record(
             'hardware_rental_manufacturer',array('id'=>$resource->manufacturer)
         )->manufacturer,
+        //data_read: hardware_rental_manufacturer
         'category' => $DB->get_record(
             'hardware_rental_category',array('id'=>$resource->category)
         )->category,

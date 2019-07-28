@@ -43,14 +43,17 @@ $strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
-
+//data_read: hardware_rental_resources
 $resource = $DB->get_record('hardware_rental_resources',array('id'=>$resourceid));
 
 // Implement form for user
 require_once(dirname(__DIR__ ) . '/forms/lab_resourceEditForm.php');
 
+//data_read: hardware_rental_category
 $categories = $DB->get_records('hardware_rental_category',array());
+//data_read: hardware_rental_manufacturer
 $manufacturers = $DB->get_records('hardware_rental_manufacturer',array());
+//data_read: hardware_rental_tags
 $tags = array_map(function($value){return $value->name;},$DB->get_records('hardware_rental_tags',array()));
 
 $mform = new labResourceEditForm(
@@ -68,12 +71,14 @@ if ($mform->is_cancelled()) {
     if(!array_key_exists($fromform->category, $categories)){
         $record = new stdClass();
         $record->category = $fromform->category;
+        //data_write: hardware_rental_category
         $lastinsertid = $DB->insert_record('hardware_rental_category', $record, true);
         $fromform->category = $lastinsertid;
     }
     if(!array_key_exists($fromform->manufacturer, $manufacturers)){
         $record = new stdClass();
         $record->manufacturer = $fromform->manufacturer;
+        //data_write: hardware_rental_manufacturer
         $lastinsertid = $DB->insert_record('hardware_rental_manufacturer', $record, true);
         $fromform->manufacturer = $lastinsertid;
     }
@@ -85,6 +90,7 @@ if ($mform->is_cancelled()) {
             }else{
                 $record = new stdClass();
                 $record->name = $tag;
+                //data_write: hardware_rental_tags
                 $DB->insert_record('hardware_rental_tags', $record, false);
                 array_push($normalized_tags, $tag);
             }
@@ -103,6 +109,7 @@ if ($mform->is_cancelled()) {
         implode(";",$fromform->tags)
     );
     $record->id = $fromform->resourceid;
+    //data_write: hardware_rental_resources
     $lastinsertid = $DB->update_record('hardware_rental_resources', $record, false);
     redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 

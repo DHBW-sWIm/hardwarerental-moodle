@@ -59,6 +59,7 @@ $table->head = array(
     get_string('lab_resourcelist_resource_details','ausleihverwaltung')
 );
 
+//data_read: hardware_rental_resources
 $resources = $DB->get_records('hardware_rental_resources',array('tenant'=>$cm->id));
 
 foreach ($resources as $resource){

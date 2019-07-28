@@ -41,6 +41,7 @@ echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
+//data_read: hardware_rental_resources
 $unfilteredList = $SESSION->resourceList;
 $filteredList = array();
 foreach ($unfilteredList as $resource){

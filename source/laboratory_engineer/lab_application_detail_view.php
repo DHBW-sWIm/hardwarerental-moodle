@@ -88,6 +88,7 @@ if ($mform->is_cancelled()) {
 
     $pdf = new PDF();
     $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_mail']['value']);
+    //data_read: hardware_rental_resources
     $pdf->Resources($DB->get_record('hardware_rental_resources',array('id'=>$resourceid)));
     $pdf->Signatures("");
 

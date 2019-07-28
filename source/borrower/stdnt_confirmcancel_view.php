@@ -42,6 +42,7 @@ echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
+//data_read: hardware_rental_applications
 $unfilteredList = $SESSION->applicationList;
 $filteredList = array();
 foreach ($unfilteredList as $application){
@@ -51,6 +52,7 @@ foreach ($unfilteredList as $application){
     }
 }
 
+//data_read: hardware_rental_applications
 $SESSION->applicationList = $filteredList;
 
 redirect(new moodle_url('./stdnt_applicationlist_view.php', array('id' => $cm->id)));

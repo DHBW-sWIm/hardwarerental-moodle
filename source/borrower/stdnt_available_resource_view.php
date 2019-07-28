@@ -82,7 +82,7 @@ $table->head = array('ID', 'Name', 'Description', 'Quantity', 'Select');
         $table->data[] = array($resource->name, $resource->description, $resource->status, $resource->quantity, $htmlLink);
     }
 }*/
-
+//data_read: hardware_rental_resources
 $resources = $DB->get_records('hardware_rental_resources',array('tenant'=>$cm->id));
 
 foreach ($resources as $resource){

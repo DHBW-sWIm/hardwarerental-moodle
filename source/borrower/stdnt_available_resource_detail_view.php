@@ -61,6 +61,7 @@ if ($mform->is_cancelled()) {
 
     $resource = new stdClass();
 
+    //data_read: hardware_rental_resources
     $resource = $DB->get_record('hardware_rental_resources',array('id'=>$resourceid));
 
     /*foreach($SESSION->resourceList as $item) {

@@ -42,8 +42,11 @@ $strName = "Add new Resource";
 echo $OUTPUT->heading($strName);
 
 require_once(dirname(__DIR__) . '/forms/lab_newResourceForm.php');
+//data_read: hardware_rental_category
 $categories = $DB->get_records('hardware_rental_category',array());
+//data_read: hardware_rental_manufacturer
 $manufacturers = $DB->get_records('hardware_rental_manufacturer',array());
+//data_read: hardware_rental_tags
 $tags = $DB->get_records('hardware_rental_tags',array());
 
 $resourceform = new labNewResourceForm(
@@ -65,12 +68,14 @@ if ($resourceform ->is_cancelled()) {
     if(!array_key_exists($fromform->category, $categories)){
         $record = new stdClass();
         $record->category = $fromform->category;
+        //data_write: hardware_rental_category
         $lastinsertid = $DB->insert_record('hardware_rental_category', $record, true);
         $fromform->category = $lastinsertid;
     }
     if(!array_key_exists($fromform->manufacturer, $manufacturers)){
         $record = new stdClass();
         $record->manufacturer = $fromform->manufacturer;
+        //data_write: hardware_rental_manufacturer
         $lastinsertid = $DB->insert_record('hardware_rental_manufacturer', $record, true);
         $fromform->manufacturer = $lastinsertid;
     }
@@ -82,6 +87,7 @@ if ($resourceform ->is_cancelled()) {
         }else{
             $record = new stdClass();
             $record->name = $tag;
+            //data_write: hardware_rental_tags
             $DB->insert_record('hardware_rental_tags', $record, false);
             array_push($normalized_tags, $tag);
         }

@@ -51,6 +51,7 @@ if($SESSION->formData1->resourcetype == 1){
         "",
         implode(";",$SESSION->formData1->tags)
     );
+    //data_write: hardware_rental_resources
     $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
     redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 }else {
@@ -86,6 +87,7 @@ if($SESSION->formData1->resourcetype == 1){
                 $fromform->$inventory_nr_prop,
                 implode(";", $SESSION->formData1->tags)
             );
+            //data_write: hardware_rental_resources
             $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
         }
         redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));

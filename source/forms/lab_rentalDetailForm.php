@@ -9,7 +9,7 @@ class labRentalDetailForm extends moodleform {
         $mform = $this->_form; // Don't forget the underscore!
 
         /* ****************** NAME *************/
-        $mform->addElement('static', 'name', 'Student:');
+        $mform->addElement('static', 'name', 'Borrower:');
         $mform->setType('name', PARAM_NOTAGS);
         $mform->setDefault('name', 'Stemmi');
 

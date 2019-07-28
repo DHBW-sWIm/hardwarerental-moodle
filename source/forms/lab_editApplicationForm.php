@@ -14,7 +14,7 @@ class labEditApplicationForm extends moodleform {
         $mform->setDefault('type', 'Ausleihantrag');
 
         /* ****************** NAME *************/
-        $mform->addElement('text', 'name', 'Student:');
+        $mform->addElement('text', 'name', 'Borrower:');
         $mform->setType('name', PARAM_NOTAGS);
         $mform->setDefault('name', 'Stemmi');
 

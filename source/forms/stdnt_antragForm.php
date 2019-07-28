@@ -12,13 +12,13 @@ class stdntAntragForm extends moodleform {
         $mform->addElement('text', 'studentName', 'Your Name:',$attributes='size=“100”');
         $mform->setType('studentName', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'studentId', 'Student ID:');
+        $mform->addElement('text', 'studentId', 'Borrower ID:');
         $mform->setType('studentId', PARAM_NOTAGS);
 
         $mform->addElement('text', 'studentEmail', 'E-Mail:');
         $mform->setType('studentEmail', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'grund', 'Reason:'); // Add elements to your form
+        $mform->addElement('textarea', 'grund', 'Reason:'); // Add elements to your form
         $mform->setType('grund', PARAM_NOTAGS);        //Default value
 
 

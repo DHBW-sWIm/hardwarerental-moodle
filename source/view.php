@@ -27,7 +27,6 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
-
 require_once(dirname(__FILE__)."/view_init.php");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
@@ -35,24 +34,24 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 global $SESSION;
 global $USER;
 
-$strName = "Login as student:";
+$strName = "Login as borrower:";
 echo $OUTPUT->heading($strName);
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_student_view.php', array('id' => $cm->id)), 'Login');
+echo $OUTPUT->single_button(new moodle_url('./borrower/main_student_view.php', array('id' => $cm->id)), 'Login');
 echo '<br>';
 echo '<br>';
 
 if(isset($usergroup[AUTH_LABORATORY_ENGINEER]) || isset($usergroup[AUTH_DHBW_AUTHORITY])){
     $strName = "Login as DHBW-authority:";
     echo $OUTPUT->heading($strName);
-    echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/main_lab_view.php', array('id' => $cm->id)), 'Login');
+    echo $OUTPUT->single_button(new moodle_url('./laboratory_engineer/main_lab_view.php', array('id' => $cm->id)), 'Login');
     echo '<br>';
     echo '<br>';
 
-    $strName = "Generate PDF";
+    /*$strName = "Generate PDF";
     echo $OUTPUT->heading($strName);
-    echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/pdf_generate.php', array('id' => $cm->id)), 'Generate');
+    echo $OUTPUT->single_button(new moodle_url('./pdf_generate.php', array('id' => $cm->id)), 'Generate');
     echo '<br>';
-    echo '<br>';
+    echo '<br>';*/
 }
 
 

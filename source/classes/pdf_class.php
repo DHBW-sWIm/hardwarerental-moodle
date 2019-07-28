@@ -13,6 +13,7 @@ class PDF extends FPDF
         $this->Cell(70);
         // Title
         $this->Cell(30,10,'Borrowers note','B',1,'C');
+        $this->Cell( 40, 40, $this->Image("../img/dhbw_logo.jpg", 0, 0, 33.78), 0, 0, 'R', false );
         // Line break
         $this->Ln(12);
     }

@@ -14,7 +14,7 @@ class labApplicationDetailForm extends moodleform {
         $mform->setDefault('type', 'Rental Application');
 
         /* ****************** NAME *************/
-        $mform->addElement('static', 'name', 'Student:');
+        $mform->addElement('static', 'name', 'Borrower:');
         $mform->setType('name', PARAM_NOTAGS);
 
         /* ****************** MATRNR *************/

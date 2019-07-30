@@ -42,4 +42,4 @@ notifications:
     on_success: change
     on_failure: always
     rooms:
-     -dhbw-moodle:AwYGrmNF9sNcQy0k0s5LGE8I#n-hardware-rental
+     - dhbw-moodle:AwYGrmNF9sNcQy0k0s5LGE8I#n-hardware-rental

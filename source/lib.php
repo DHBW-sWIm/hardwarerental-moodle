@@ -1,51 +1,19 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module hardwarerental
- *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the hardwarerental specific functions, needed to implement all the module
- * logic, should go to locallib.php. This will help to save some memory when
- * Moodle is performing actions across all modules.
- *
- * @package    mod_hardwarerental
- * @copyright  2016 Your Name <your@email.address>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * All the  specific functions, needed to implement all the module
+ * logic, should go to locallib.php.
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-/*function checkDeadline()
-{
-    $email_user1 = new stdClass;
-    $email_user1>email= "abc@example.com";
-    $email_user1>firstname=" ";
-    $email_user1>lastname;
-    $email_user1>maildisplay = true;
-    $email_user1>mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML/Text emails.
-    $email_user1>id=-99;
-    $a=>email_to_user($email_user, $email_user1, $subject, $content);
-}*/
 /**
  * Example constant, you probably want to remove this :-)
  */
-define('hardwarerental_ULTIMATE_ANSWER', 42);
+define('studentregistration_ULTIMATE_ANSWER', 42);
 
 /* Moodle core API */
 
@@ -57,9 +25,9 @@ define('hardwarerental_ULTIMATE_ANSWER', 42);
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function hardwarerental_supports($feature) {
+function studentregistration_supports($feature) {
 
-    switch($feature) {
+    switch ($feature) {
         case FEATURE_MOD_INTRO:
             return true;
         case FEATURE_SHOW_DESCRIPTION:
@@ -74,53 +42,53 @@ function hardwarerental_supports($feature) {
 }
 
 /**
- * Saves a new instance of the hardwarerental into the database
+ * Saves a new instance of the studentregistration into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param stdClass $hardwarerental Submitted data from the form in mod_form.php
- * @param mod_hardwarerental_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted hardwarerental record
+ * @param stdClass $studentregistration Submitted data from the form in mod_form.php
+ * @param mod_studentregistration_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted studentregistration record
  */
-function hardwarerental_add_instance(stdClass $hardwarerental, mod_hardwarerental_mod_form $mform = null) {
+function studentregistration_add_instance(stdClass $studentregistration, mod_studentregistration_mod_form $mform = null) {
     global $DB;
 
-    $hardwarerental->timecreated = time();
+    $studentregistration->timecreated = time();
 
     // You may have to add extra stuff in here.
 
-    $hardwarerental->id = $DB->insert_record('hardwarerental', $hardwarerental);
+    $studentregistration->id = $DB->insert_record('studentregistration', $studentregistration);
 
-    hardwarerental_grade_item_update($hardwarerental);
+    studentregistration_grade_item_update($studentregistration);
 
-    return $hardwarerental->id;
+    return $studentregistration->id;
 }
 
 /**
- * Updates an instance of the hardwarerental in the database
+ * Updates an instance of the studentregistration in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param stdClass $hardwarerental An object from the form in mod_form.php
- * @param mod_hardwarerental_mod_form $mform The form instance itself (if needed)
+ * @param stdClass $studentregistration An object from the form in mod_form.php
+ * @param mod_studentregistration_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function hardwarerental_update_instance(stdClass $hardwarerental, mod_hardwarerental_mod_form $mform = null) {
+function studentregistration_update_instance(stdClass $studentregistration, mod_studentregistration_mod_form $mform = null) {
     global $DB;
 
-    $hardwarerental->timemodified = time();
-    $hardwarerental->id = $hardwarerental->instance;
+    $studentregistration->timemodified = time();
+    $studentregistration->id = $studentregistration->instance;
 
     // You may have to add extra stuff in here.
 
-    $result = $DB->update_record('hardwarerental', $hardwarerental);
+    $result = $DB->update_record('studentregistration', $studentregistration);
 
-    hardwarerental_grade_item_update($hardwarerental);
+    studentregistration_grade_item_update($studentregistration);
 
     return $result;
 }
@@ -128,36 +96,36 @@ function hardwarerental_update_instance(stdClass $hardwarerental, mod_hardwarere
 /**
  * This standard function will check all instances of this module
  * and make sure there are up-to-date events created for each of them.
- * If courseid = 0, then every hardwarerental event in the site is checked, else
- * only hardwarerental events belonging to the course specified are checked.
+ * If courseid = 0, then every studentregistration event in the site is checked, else
+ * only studentregistration events belonging to the course specified are checked.
  * This is only required if the module is generating calendar events.
  *
  * @param int $courseid Course ID
  * @return bool
  */
-function hardwarerental_refresh_events($courseid = 0) {
+function studentregistration_refresh_events($courseid = 0) {
     global $DB;
 
     if ($courseid == 0) {
-        if (!$hardwarerentals = $DB->get_records('hardwarerental')) {
+        if (!$studentregistrations = $DB->get_records('studentregistration')) {
             return true;
         }
     } else {
-        if (!$hardwarerentals = $DB->get_records('hardwarerental', array('course' => $courseid))) {
+        if (!$studentregistrations = $DB->get_records('studentregistration', array('course' => $courseid))) {
             return true;
         }
     }
 
-    foreach ($hardwarerentals as $hardwarerental) {
+    foreach ($studentregistrations as $studentregistration) {
         // Create a function such as the one below to deal with updating calendar events.
-        // hardwarerental_update_events($hardwarerental);
+        // studentregistration_update_events($studentregistration);
     }
 
     return true;
 }
 
 /**
- * Removes an instance of the hardwarerental from the database
+ * Removes an instance of the studentregistration from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -166,18 +134,18 @@ function hardwarerental_refresh_events($courseid = 0) {
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function hardwarerental_delete_instance($id) {
+function studentregistration_delete_instance($id) {
     global $DB;
 
-    if (! $hardwarerental = $DB->get_record('hardwarerental', array('id' => $id))) {
+    if (!$studentregistration = $DB->get_record('studentregistration', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
 
-    $DB->delete_records('hardwarerental', array('id' => $hardwarerental->id));
+    $DB->delete_records('studentregistration', array('id' => $studentregistration->id));
 
-    hardwarerental_grade_item_delete($hardwarerental);
+    studentregistration_grade_item_delete($studentregistration);
 
     return true;
 }
@@ -193,10 +161,10 @@ function hardwarerental_delete_instance($id) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $hardwarerental The hardwarerental instance record
+ * @param stdClass $studentregistration The studentregistration instance record
  * @return stdClass|null
  */
-function hardwarerental_user_outline($course, $user, $mod, $hardwarerental) {
+function studentregistration_user_outline($course, $user, $mod, $studentregistration) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -213,21 +181,21 @@ function hardwarerental_user_outline($course, $user, $mod, $hardwarerental) {
  * @param stdClass $course the current course record
  * @param stdClass $user the record of the user we are generating report for
  * @param cm_info $mod course module info
- * @param stdClass $hardwarerental the module instance record
+ * @param stdClass $studentregistration the module instance record
  */
-function hardwarerental_user_complete($course, $user, $mod, $hardwarerental) {
+function studentregistration_user_complete($course, $user, $mod, $studentregistration) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in hardwarerental activities and print it out.
+ * that has occurred in studentregistration activities and print it out.
  *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function hardwarerental_print_recent_activity($course, $viewfullnames, $timestart) {
+function studentregistration_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -236,7 +204,7 @@ function hardwarerental_print_recent_activity($course, $viewfullnames, $timestar
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link hardwarerental_print_recent_mod_activity()}.
+ * {@link studentregistration_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -248,11 +216,11 @@ function hardwarerental_print_recent_activity($course, $viewfullnames, $timestar
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function hardwarerental_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
+function studentregistration_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0, $groupid = 0) {
 }
 
 /**
- * Prints single activity item prepared by {@link hardwarerental_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@link studentregistration_get_recent_mod_activity()}
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
@@ -260,7 +228,7 @@ function hardwarerental_get_recent_mod_activity(&$activities, &$index, $timestar
  * @param array $modnames as returned by {@link get_module_types_names()}
  * @param bool $viewfullnames display users' full names
  */
-function hardwarerental_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
+function studentregistration_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -273,7 +241,7 @@ function hardwarerental_print_recent_mod_activity($activity, $courseid, $detail,
  *
  * @return boolean
  */
-function hardwarerental_cron () {
+function studentregistration_cron() {
     return true;
 }
 
@@ -285,26 +253,26 @@ function hardwarerental_cron () {
  *
  * @return array
  */
-function hardwarerental_get_extra_capabilities() {
+function studentregistration_get_extra_capabilities() {
     return array();
 }
 
 /* Gradebook API */
 
 /**
- * Is a given scale used by the instance of hardwarerental?
+ * Is a given scale used by the instance of studentregistration?
  *
- * This function returns if a scale is being used by one hardwarerental
+ * This function returns if a scale is being used by one studentregistration
  * if it has support for grading and scales.
  *
- * @param int $hardwarerentalid ID of an instance of this module
+ * @param int $studentregistrationid ID of an instance of this module
  * @param int $scaleid ID of the scale
- * @return bool true if the scale is used by the given hardwarerental instance
+ * @return bool true if the scale is used by the given studentregistration instance
  */
-function hardwarerental_scale_used($hardwarerentalid, $scaleid) {
+function studentregistration_scale_used($studentregistrationid, $scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('hardwarerental', array('id' => $hardwarerentalid, 'grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('studentregistration', array('id' => $studentregistrationid, 'grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -312,17 +280,17 @@ function hardwarerental_scale_used($hardwarerentalid, $scaleid) {
 }
 
 /**
- * Checks if scale is being used by any instance of hardwarerental.
+ * Checks if scale is being used by any instance of studentregistration.
  *
  * This is used to find out if scale used anywhere.
  *
  * @param int $scaleid ID of the scale
- * @return boolean true if the scale is used by any hardwarerental instance
+ * @return boolean true if the scale is used by any studentregistration instance
  */
-function hardwarerental_scale_used_anywhere($scaleid) {
+function studentregistration_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('hardwarerental', array('grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('studentregistration', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -330,29 +298,29 @@ function hardwarerental_scale_used_anywhere($scaleid) {
 }
 
 /**
- * Creates or updates grade item for the given hardwarerental instance
+ * Creates or updates grade item for the given studentregistration instance
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $hardwarerental instance object with extra cmidnumber and modname property
+ * @param stdClass $studentregistration instance object with extra cmidnumber and modname property
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function hardwarerental_grade_item_update(stdClass $hardwarerental, $reset=false) {
+function studentregistration_grade_item_update(stdClass $studentregistration, $reset = false) {
     global $CFG;
-    require_once($CFG->libdir.'/gradelib.php');
+    require_once($CFG->libdir . '/gradelib.php');
 
     $item = array();
-    $item['itemname'] = clean_param($hardwarerental->name, PARAM_NOTAGS);
+    $item['itemname'] = clean_param($studentregistration->name, PARAM_NOTAGS);
     $item['gradetype'] = GRADE_TYPE_VALUE;
 
-    if ($hardwarerental->grade > 0) {
+    if ($studentregistration->grade > 0) {
         $item['gradetype'] = GRADE_TYPE_VALUE;
-        $item['grademax']  = $hardwarerental->grade;
-        $item['grademin']  = 0;
-    } else if ($hardwarerental->grade < 0) {
+        $item['grademax'] = $studentregistration->grade;
+        $item['grademin'] = 0;
+    } else if ($studentregistration->grade < 0) {
         $item['gradetype'] = GRADE_TYPE_SCALE;
-        $item['scaleid']   = -$hardwarerental->grade;
+        $item['scaleid'] = -$studentregistration->grade;
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
@@ -361,40 +329,40 @@ function hardwarerental_grade_item_update(stdClass $hardwarerental, $reset=false
         $item['reset'] = true;
     }
 
-    grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental',
-            $hardwarerental->id, 0, null, $item);
+    grade_update('mod/studentregistration', $studentregistration->course, 'mod', 'studentregistration',
+        $studentregistration->id, 0, null, $item);
 }
 
 /**
- * Delete grade item for given hardwarerental instance
+ * Delete grade item for given studentregistration instance
  *
- * @param stdClass $hardwarerental instance object
+ * @param stdClass $studentregistration instance object
  * @return grade_item
  */
-function hardwarerental_grade_item_delete($hardwarerental) {
+function studentregistration_grade_item_delete($studentregistration) {
     global $CFG;
-    require_once($CFG->libdir.'/gradelib.php');
+    require_once($CFG->libdir . '/gradelib.php');
 
-    return grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental',
-            $hardwarerental->id, 0, null, array('deleted' => 1));
+    return grade_update('mod/studentregistration', $studentregistration->course, 'mod', 'studentregistration',
+        $studentregistration->id, 0, null, array('deleted' => 1));
 }
 
 /**
- * Update hardwarerental grades in the gradebook
+ * Update studentregistration grades in the gradebook
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $hardwarerental instance object with extra cmidnumber and modname property
+ * @param stdClass $studentregistration instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
-function hardwarerental_update_grades(stdClass $hardwarerental, $userid = 0) {
+function studentregistration_update_grades(stdClass $studentregistration, $userid = 0) {
     global $CFG, $DB;
-    require_once($CFG->libdir.'/gradelib.php');
+    require_once($CFG->libdir . '/gradelib.php');
 
     // Populate array of grade objects indexed by userid.
     $grades = array();
 
-    grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental', $hardwarerental->id, 0, $grades);
+    grade_update('mod/studentregistration', $studentregistration->course, 'mod', 'studentregistration', $studentregistration->id, 0, $grades);
 }
 
 /* File API */
@@ -410,14 +378,14 @@ function hardwarerental_update_grades(stdClass $hardwarerental, $userid = 0) {
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function hardwarerental_get_file_areas($course, $cm, $context) {
+function studentregistration_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for hardwarerental file areas
+ * File browsing support for studentregistration file areas
  *
- * @package mod_hardwarerental
+ * @package mod_studentregistration
  * @category files
  *
  * @param file_browser $browser
@@ -431,25 +399,25 @@ function hardwarerental_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function hardwarerental_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function studentregistration_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the hardwarerental file areas
+ * Serves the files from the studentregistration file areas
  *
- * @package mod_hardwarerental
+ * @package mod_studentregistration
  * @category files
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the hardwarerental's context
+ * @param stdClass $context the studentregistration's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function hardwarerental_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function studentregistration_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -464,28 +432,28 @@ function hardwarerental_pluginfile($course, $cm, $context, $filearea, array $arg
 /* Navigation API */
 
 /**
- * Extends the global navigation tree by adding hardwarerental nodes if there is a relevant content
+ * Extends the global navigation tree by adding studentregistration nodes if there is a relevant content
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref An object representing the navigation tree node of the hardwarerental module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the studentregistration module instance
  * @param stdClass $course current course record
- * @param stdClass $module current hardwarerental instance record
+ * @param stdClass $module current studentregistration instance record
  * @param cm_info $cm course module information
  */
-function hardwarerental_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
+function studentregistration_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     // TODO Delete this function and its docblock, or implement it.
 }
 
 /**
- * Extends the settings navigation with the hardwarerental settings
+ * Extends the settings navigation with the studentregistration settings
  *
- * This function is called when the context for the page is a hardwarerental module. This is not called by AJAX
+ * This function is called when the context for the page is a studentregistration module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
  * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $hardwarerentalnode hardwarerental administration node
+ * @param navigation_node $studentregistrationnode studentregistration administration node
  */
-function hardwarerental_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $hardwarerentalnode=null) {
+function studentregistration_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $studentregistrationnode = null) {
     // TODO Delete this function and its docblock, or implement it.
 }

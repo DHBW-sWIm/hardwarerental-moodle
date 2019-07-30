@@ -1,33 +1,35 @@
---- 
-addons: 
+---
+addons:
   firefox: "47.0.1"
   postgresql: "9.3"
-before_install: 
+before_install:
   - "phpenv config-rm xdebug.ini"
   - "nvm install 8.9"
   - "nvm use 8.9"
   - "cd ../.."
   - "composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^2"
   - "export PATH=\"$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH\""
-
-cache: 
-  directories: 
+branches:
+  only:
+    - master
+cache:
+  directories:
     - $HOME/.composer/cache
     - $HOME/.npm
-env: 
-  global: 
+env:
+  global:
     - MOODLE_BRANCH=MOODLE_32_STABLE
-    - IGNORE_PATHS=source/lib,vendor/,**/lib/
-  matrix: 
+    - IGNORE_PATHS=mod/testmodule/lib/**/*
+  matrix:
     - DB=pgsql
-install: 
+install:
   - "moodle-plugin-ci install --plugin=${TRAVIS_BUILD_DIR}/source"
 language: php
-php: 
+php:
   - 7.1
-script: 
+script:
   - "moodle-plugin-ci phplint"
-  #- "moodle-plugin-ci phpmd" 
+  #- "moodle-plugin-ci phpmd"
   - "moodle-plugin-ci validate"
   - "moodle-plugin-ci savepoints"
   - "moodle-plugin-ci grunt"
@@ -36,9 +38,6 @@ script:
 sudo: false
 
 notifications:
-  email: false
   slack:
-    on_success: change
-    on_failure: always
     rooms:
-     - wwi15scb:GL6zGn42jLxtsCd5TAm4M2x6#mdl_ops
+      - dhbw-moodle:AwYGrmNF9sNcQy0k0s5LGE8I#n-studentregistration

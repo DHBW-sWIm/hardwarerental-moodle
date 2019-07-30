@@ -49,31 +49,13 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
             </KEYS>
         </TABLE>
-		<TABLE NAME="studentregistration_course" COMMENT="Table for Course Registration">
-        <FIELDS>
-            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-            <FIELD NAME="courseacronym" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-            <FIELD NAME="noofstudents" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-            <FIELD NAME="studyprogram" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-            <FIELD NAME="programdirector" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
-            <FIELD NAME="specialisation" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
-            <FIELD NAME="yeargroup" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-            <FIELD NAME="secretary" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
-            <FIELD NAME="semesterstart" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        </FIELDS>
-        <KEYS>
-            <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-        </KEYS>
-    </TABLE>
         <TABLE NAME="studentregistration_hours" COMMENT="Table for Lecture Hours">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-                <FIELD NAME="firstname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-                <FIELD NAME="surname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-                <FIELD NAME="company" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-                <FIELD NAME="lhours" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-                <FIELD NAME="exams" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-                <FIELD NAME="papers" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="firstname" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="surname" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="company" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="hours" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

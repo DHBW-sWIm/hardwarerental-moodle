@@ -17,7 +17,8 @@ cache:
 env: 
   global: 
     - MOODLE_BRANCH=MOODLE_32_STABLE
-    - IGNORE_PATHS=source/lib,vendor/,**/lib/
+    - IGNORE_PATHS=${TRAVIS_BUILD_DIR}/source/lib,vendor/,**/lib/
+    - IGNORE_NAMES=fpdf.css
   matrix: 
     - DB=pgsql
 install: 
@@ -41,4 +42,4 @@ notifications:
     on_success: change
     on_failure: always
     rooms:
-     - wwi15scb:GL6zGn42jLxtsCd5TAm4M2x6#mdl_ops
+     -dhbw-moodle:AwYGrmNF9sNcQy0k0s5LGE8I#n-hardware-rental

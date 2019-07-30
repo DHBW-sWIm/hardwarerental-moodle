@@ -17,7 +17,7 @@ cache:
 env: 
   global: 
     - MOODLE_BRANCH=MOODLE_32_STABLE
-    - IGNORE_PATHS=source/lib,vendor/,**/lib/
+    - IGNORE_PATHS=source/lib,source/pdf,vendor/,**/lib/
   matrix: 
     - DB=pgsql
 install: 

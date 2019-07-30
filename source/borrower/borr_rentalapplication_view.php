@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,7 +51,7 @@ $mform->render();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-    redirect(new moodle_url('./stdnt_available_resource_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('./borr_available_resource_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
     $resource = new stdClass();
@@ -61,15 +61,15 @@ if ($mform->is_cancelled()) {
             break;
         }
     }*/
-    //data_read: hardware_rental_resources
-    $resource = $DB->get_record('hardware_rental_resources',array('id'=>$fromform->resourceid));
+    //data_read: hardwarerental_resources
+    $resource = $DB->get_record('hardwarerental_resources',array('id'=>$fromform->resourceid));
 
     $appId = rand(1,10000);
     $responsibles = array('Prof. Martin', 'Prof. Koslowski', 'Gzuz', 'Tichy');
     $responsible = $responsibles[$fromform->assignee];
     $SESSION->applicationList[] = (object) array('id' => $appId, 'student_name' => $fromform->studentName, 'student_id' => $fromform->studentId, 'mail' => $fromform->studentEmail, 'resource' => $resource->name, 'grund' => $fromform->grund, 'returndate' => $fromform->returnDate, 'anmerkung' => $fromform->anmerkung, 'assignee' => $responsible, 'applicationtype' => 'Rental Application', 'status' => 'Requested');
 
-    // redirect(new moodle_url('./stdnt_applicationlist_view.php', array('id' => $cm->id)));
+    // redirect(new moodle_url('./borr_applicationlist_view.php', array('id' => $cm->id)));
 
     start_process("hardwarerental-request-approval",[
         'stdnt_firstname' => new camunda_variable($USER->firstname, 'string'),
@@ -90,7 +90,7 @@ if ($mform->is_cancelled()) {
         'req_date' => new camunda_variable(time(), 'string')
     ]);
 
-    $returnurl = new moodle_url('./stdnt_applicationlist_view.php', array('id' => $cm->id));
+    $returnurl = new moodle_url('./borr_applicationlist_view.php', array('id' => $cm->id));
     redirect($returnurl);
 
 } else {
@@ -105,6 +105,6 @@ if ($mform->is_cancelled()) {
     $mform->display();
 }
 
-echo $OUTPUT->single_button(new moodle_url('./main_student_view.php', array('id' => $cm->id)), 'Home');
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();

@@ -1,6 +1,6 @@
 <?php
 
-require_once('/bitnami/moodle/mod/ausleihverwaltung/pdf/fpdf.php');
+require_once('/bitnami/moodle/mod/hardwarerental/pdf/fpdf.php');
 
 class PDF extends FPDF
 {

@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines backup_ausleihverwaltung_activity_task class
+ * Defines backup_hardwarerental_activity_task class
  *
- * @package   mod_ausleihverwaltung
+ * @package   mod_hardwarerental
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/ausleihverwaltung/backup/moodle2/backup_ausleihverwaltung_stepslib.php');
+require_once($CFG->dirroot . '/mod/hardwarerental/backup/moodle2/backup_hardwarerental_stepslib.php');
 
 /**
- * Provides the steps to perform one complete backup of the ausleihverwaltung instance
+ * Provides the steps to perform one complete backup of the hardwarerental instance
  *
- * @package   mod_ausleihverwaltung
+ * @package   mod_hardwarerental
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_ausleihverwaltung_activity_task extends backup_activity_task {
+class backup_hardwarerental_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity
@@ -44,10 +44,10 @@ class backup_ausleihverwaltung_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the ausleihverwaltung.xml file
+     * Defines a backup step to store the instance data in the hardwarerental.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_ausleihverwaltung_activity_structure_step('ausleihverwaltung_structure', 'ausleihverwaltung.xml'));
+        $this->add_step(new backup_hardwarerental_activity_structure_step('hardwarerental_structure', 'hardwarerental.xml'));
     }
 
     /**
@@ -61,13 +61,13 @@ class backup_ausleihverwaltung_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of ausleihverwaltungs.
-        $search = '/('.$base.'\/mod\/ausleihverwaltung\/index.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@ausleihverwaltungINDEX*$2@$', $content);
+        // Link to the list of hardwarerentals.
+        $search = '/('.$base.'\/mod\/hardwarerental\/index.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@hardwarerentalINDEX*$2@$', $content);
 
-        // Link to ausleihverwaltung view by moduleid.
-        $search = '/('.$base.'\/mod\/ausleihverwaltung\/lab_new_resource_view.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@ausleihverwaltungVIEWBYID*$2@$', $content);
+        // Link to hardwarerental view by moduleid.
+        $search = '/('.$base.'\/mod\/hardwarerental\/lab_new_resource_view.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@hardwarerentalVIEWBYID*$2@$', $content);
 
         return $content;
     }

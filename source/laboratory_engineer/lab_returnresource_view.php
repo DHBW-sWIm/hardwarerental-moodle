@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Prints a particular instance of ausleihverwaltung
+ * Prints a particular instance of hardwarerental
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,8 +35,8 @@ if(!isset($usergroup[AUTH_LABORATORY_ENGINEER])) die("403 Unauthorized");
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($ausleihverwaltung->intro) {
-    echo $OUTPUT->box(format_module_intro('ausleihverwaltung', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihverwaltungintro');
+if ($hardwarerental->intro) {
+    echo $OUTPUT->box(format_module_intro('hardwarerental', $hardwarerental, $cm->id), 'generalbox mod_introbox', 'hardwarerentalintro');
 }
 
 // Replace the following lines with you own code.

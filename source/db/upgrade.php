@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * This file keeps track of upgrades to the ausleihverwaltung module
+ * This file keeps track of upgrades to the hardwarerental module
  *
  * Sometimes, changes between versions involve alterations to database
  * structures and other major things that may break installations. The upgrade
@@ -23,18 +23,18 @@
  * it cannot do itself, it will tell you what you need to do.  The commands in
  * here will all be database-neutral, using the functions defined in DLL libraries.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 /**
- * Execute ausleihverwaltung upgrade from the given old version
+ * Execute hardwarerental upgrade from the given old version
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_ausleihverwaltung_upgrade($oldversion) {
+function xmldb_hardwarerental_upgrade($oldversion) {
     
     return true;
 }

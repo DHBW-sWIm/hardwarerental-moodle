@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module ausleihverwaltung
+ * Library of interface functions and constants for module hardwarerental
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the ausleihverwaltung specific functions, needed to implement all the module
+ * All the hardwarerental specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -45,7 +45,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Example constant, you probably want to remove this :-)
  */
-define('AUSLEIHVERWALTUNG_ULTIMATE_ANSWER', 42);
+define('hardwarerental_ULTIMATE_ANSWER', 42);
 
 /* Moodle core API */
 
@@ -57,7 +57,7 @@ define('AUSLEIHVERWALTUNG_ULTIMATE_ANSWER', 42);
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function ausleihverwaltung_supports($feature) {
+function hardwarerental_supports($feature) {
 
     switch($feature) {
         case FEATURE_MOD_INTRO:
@@ -74,53 +74,53 @@ function ausleihverwaltung_supports($feature) {
 }
 
 /**
- * Saves a new instance of the ausleihverwaltung into the database
+ * Saves a new instance of the hardwarerental into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param stdClass $ausleihverwaltung Submitted data from the form in mod_form.php
- * @param mod_ausleihverwaltung_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted ausleihverwaltung record
+ * @param stdClass $hardwarerental Submitted data from the form in mod_form.php
+ * @param mod_hardwarerental_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted hardwarerental record
  */
-function ausleihverwaltung_add_instance(stdClass $ausleihverwaltung, mod_ausleihverwaltung_mod_form $mform = null) {
+function hardwarerental_add_instance(stdClass $hardwarerental, mod_hardwarerental_mod_form $mform = null) {
     global $DB;
 
-    $ausleihverwaltung->timecreated = time();
+    $hardwarerental->timecreated = time();
 
     // You may have to add extra stuff in here.
 
-    $ausleihverwaltung->id = $DB->insert_record('ausleihverwaltung', $ausleihverwaltung);
+    $hardwarerental->id = $DB->insert_record('hardwarerental', $hardwarerental);
 
-    ausleihverwaltung_grade_item_update($ausleihverwaltung);
+    hardwarerental_grade_item_update($hardwarerental);
 
-    return $ausleihverwaltung->id;
+    return $hardwarerental->id;
 }
 
 /**
- * Updates an instance of the ausleihverwaltung in the database
+ * Updates an instance of the hardwarerental in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param stdClass $ausleihverwaltung An object from the form in mod_form.php
- * @param mod_ausleihverwaltung_mod_form $mform The form instance itself (if needed)
+ * @param stdClass $hardwarerental An object from the form in mod_form.php
+ * @param mod_hardwarerental_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function ausleihverwaltung_update_instance(stdClass $ausleihverwaltung, mod_ausleihverwaltung_mod_form $mform = null) {
+function hardwarerental_update_instance(stdClass $hardwarerental, mod_hardwarerental_mod_form $mform = null) {
     global $DB;
 
-    $ausleihverwaltung->timemodified = time();
-    $ausleihverwaltung->id = $ausleihverwaltung->instance;
+    $hardwarerental->timemodified = time();
+    $hardwarerental->id = $hardwarerental->instance;
 
     // You may have to add extra stuff in here.
 
-    $result = $DB->update_record('ausleihverwaltung', $ausleihverwaltung);
+    $result = $DB->update_record('hardwarerental', $hardwarerental);
 
-    ausleihverwaltung_grade_item_update($ausleihverwaltung);
+    hardwarerental_grade_item_update($hardwarerental);
 
     return $result;
 }
@@ -128,36 +128,36 @@ function ausleihverwaltung_update_instance(stdClass $ausleihverwaltung, mod_ausl
 /**
  * This standard function will check all instances of this module
  * and make sure there are up-to-date events created for each of them.
- * If courseid = 0, then every ausleihverwaltung event in the site is checked, else
- * only ausleihverwaltung events belonging to the course specified are checked.
+ * If courseid = 0, then every hardwarerental event in the site is checked, else
+ * only hardwarerental events belonging to the course specified are checked.
  * This is only required if the module is generating calendar events.
  *
  * @param int $courseid Course ID
  * @return bool
  */
-function ausleihverwaltung_refresh_events($courseid = 0) {
+function hardwarerental_refresh_events($courseid = 0) {
     global $DB;
 
     if ($courseid == 0) {
-        if (!$ausleihverwaltungs = $DB->get_records('ausleihverwaltung')) {
+        if (!$hardwarerentals = $DB->get_records('hardwarerental')) {
             return true;
         }
     } else {
-        if (!$ausleihverwaltungs = $DB->get_records('ausleihverwaltung', array('course' => $courseid))) {
+        if (!$hardwarerentals = $DB->get_records('hardwarerental', array('course' => $courseid))) {
             return true;
         }
     }
 
-    foreach ($ausleihverwaltungs as $ausleihverwaltung) {
+    foreach ($hardwarerentals as $hardwarerental) {
         // Create a function such as the one below to deal with updating calendar events.
-        // ausleihverwaltung_update_events($ausleihverwaltung);
+        // hardwarerental_update_events($hardwarerental);
     }
 
     return true;
 }
 
 /**
- * Removes an instance of the ausleihverwaltung from the database
+ * Removes an instance of the hardwarerental from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -166,18 +166,18 @@ function ausleihverwaltung_refresh_events($courseid = 0) {
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function ausleihverwaltung_delete_instance($id) {
+function hardwarerental_delete_instance($id) {
     global $DB;
 
-    if (! $ausleihverwaltung = $DB->get_record('ausleihverwaltung', array('id' => $id))) {
+    if (! $hardwarerental = $DB->get_record('hardwarerental', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
 
-    $DB->delete_records('ausleihverwaltung', array('id' => $ausleihverwaltung->id));
+    $DB->delete_records('hardwarerental', array('id' => $hardwarerental->id));
 
-    ausleihverwaltung_grade_item_delete($ausleihverwaltung);
+    hardwarerental_grade_item_delete($hardwarerental);
 
     return true;
 }
@@ -193,10 +193,10 @@ function ausleihverwaltung_delete_instance($id) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $ausleihverwaltung The ausleihverwaltung instance record
+ * @param stdClass $hardwarerental The hardwarerental instance record
  * @return stdClass|null
  */
-function ausleihverwaltung_user_outline($course, $user, $mod, $ausleihverwaltung) {
+function hardwarerental_user_outline($course, $user, $mod, $hardwarerental) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -213,21 +213,21 @@ function ausleihverwaltung_user_outline($course, $user, $mod, $ausleihverwaltung
  * @param stdClass $course the current course record
  * @param stdClass $user the record of the user we are generating report for
  * @param cm_info $mod course module info
- * @param stdClass $ausleihverwaltung the module instance record
+ * @param stdClass $hardwarerental the module instance record
  */
-function ausleihverwaltung_user_complete($course, $user, $mod, $ausleihverwaltung) {
+function hardwarerental_user_complete($course, $user, $mod, $hardwarerental) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in ausleihverwaltung activities and print it out.
+ * that has occurred in hardwarerental activities and print it out.
  *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function ausleihverwaltung_print_recent_activity($course, $viewfullnames, $timestart) {
+function hardwarerental_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -236,7 +236,7 @@ function ausleihverwaltung_print_recent_activity($course, $viewfullnames, $times
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link ausleihverwaltung_print_recent_mod_activity()}.
+ * {@link hardwarerental_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -248,11 +248,11 @@ function ausleihverwaltung_print_recent_activity($course, $viewfullnames, $times
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function ausleihverwaltung_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
+function hardwarerental_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
 }
 
 /**
- * Prints single activity item prepared by {@link ausleihverwaltung_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@link hardwarerental_get_recent_mod_activity()}
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
@@ -260,7 +260,7 @@ function ausleihverwaltung_get_recent_mod_activity(&$activities, &$index, $times
  * @param array $modnames as returned by {@link get_module_types_names()}
  * @param bool $viewfullnames display users' full names
  */
-function ausleihverwaltung_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
+function hardwarerental_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -273,7 +273,7 @@ function ausleihverwaltung_print_recent_mod_activity($activity, $courseid, $deta
  *
  * @return boolean
  */
-function ausleihverwaltung_cron () {
+function hardwarerental_cron () {
     return true;
 }
 
@@ -285,26 +285,26 @@ function ausleihverwaltung_cron () {
  *
  * @return array
  */
-function ausleihverwaltung_get_extra_capabilities() {
+function hardwarerental_get_extra_capabilities() {
     return array();
 }
 
 /* Gradebook API */
 
 /**
- * Is a given scale used by the instance of ausleihverwaltung?
+ * Is a given scale used by the instance of hardwarerental?
  *
- * This function returns if a scale is being used by one ausleihverwaltung
+ * This function returns if a scale is being used by one hardwarerental
  * if it has support for grading and scales.
  *
- * @param int $ausleihverwaltungid ID of an instance of this module
+ * @param int $hardwarerentalid ID of an instance of this module
  * @param int $scaleid ID of the scale
- * @return bool true if the scale is used by the given ausleihverwaltung instance
+ * @return bool true if the scale is used by the given hardwarerental instance
  */
-function ausleihverwaltung_scale_used($ausleihverwaltungid, $scaleid) {
+function hardwarerental_scale_used($hardwarerentalid, $scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('ausleihverwaltung', array('id' => $ausleihverwaltungid, 'grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('hardwarerental', array('id' => $hardwarerentalid, 'grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -312,17 +312,17 @@ function ausleihverwaltung_scale_used($ausleihverwaltungid, $scaleid) {
 }
 
 /**
- * Checks if scale is being used by any instance of ausleihverwaltung.
+ * Checks if scale is being used by any instance of hardwarerental.
  *
  * This is used to find out if scale used anywhere.
  *
  * @param int $scaleid ID of the scale
- * @return boolean true if the scale is used by any ausleihverwaltung instance
+ * @return boolean true if the scale is used by any hardwarerental instance
  */
-function ausleihverwaltung_scale_used_anywhere($scaleid) {
+function hardwarerental_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('ausleihverwaltung', array('grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('hardwarerental', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -330,29 +330,29 @@ function ausleihverwaltung_scale_used_anywhere($scaleid) {
 }
 
 /**
- * Creates or updates grade item for the given ausleihverwaltung instance
+ * Creates or updates grade item for the given hardwarerental instance
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $ausleihverwaltung instance object with extra cmidnumber and modname property
+ * @param stdClass $hardwarerental instance object with extra cmidnumber and modname property
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function ausleihverwaltung_grade_item_update(stdClass $ausleihverwaltung, $reset=false) {
+function hardwarerental_grade_item_update(stdClass $hardwarerental, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
     $item = array();
-    $item['itemname'] = clean_param($ausleihverwaltung->name, PARAM_NOTAGS);
+    $item['itemname'] = clean_param($hardwarerental->name, PARAM_NOTAGS);
     $item['gradetype'] = GRADE_TYPE_VALUE;
 
-    if ($ausleihverwaltung->grade > 0) {
+    if ($hardwarerental->grade > 0) {
         $item['gradetype'] = GRADE_TYPE_VALUE;
-        $item['grademax']  = $ausleihverwaltung->grade;
+        $item['grademax']  = $hardwarerental->grade;
         $item['grademin']  = 0;
-    } else if ($ausleihverwaltung->grade < 0) {
+    } else if ($hardwarerental->grade < 0) {
         $item['gradetype'] = GRADE_TYPE_SCALE;
-        $item['scaleid']   = -$ausleihverwaltung->grade;
+        $item['scaleid']   = -$hardwarerental->grade;
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
@@ -361,40 +361,40 @@ function ausleihverwaltung_grade_item_update(stdClass $ausleihverwaltung, $reset
         $item['reset'] = true;
     }
 
-    grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung',
-            $ausleihverwaltung->id, 0, null, $item);
+    grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental',
+            $hardwarerental->id, 0, null, $item);
 }
 
 /**
- * Delete grade item for given ausleihverwaltung instance
+ * Delete grade item for given hardwarerental instance
  *
- * @param stdClass $ausleihverwaltung instance object
+ * @param stdClass $hardwarerental instance object
  * @return grade_item
  */
-function ausleihverwaltung_grade_item_delete($ausleihverwaltung) {
+function hardwarerental_grade_item_delete($hardwarerental) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
-    return grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung',
-            $ausleihverwaltung->id, 0, null, array('deleted' => 1));
+    return grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental',
+            $hardwarerental->id, 0, null, array('deleted' => 1));
 }
 
 /**
- * Update ausleihverwaltung grades in the gradebook
+ * Update hardwarerental grades in the gradebook
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $ausleihverwaltung instance object with extra cmidnumber and modname property
+ * @param stdClass $hardwarerental instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
-function ausleihverwaltung_update_grades(stdClass $ausleihverwaltung, $userid = 0) {
+function hardwarerental_update_grades(stdClass $hardwarerental, $userid = 0) {
     global $CFG, $DB;
     require_once($CFG->libdir.'/gradelib.php');
 
     // Populate array of grade objects indexed by userid.
     $grades = array();
 
-    grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung', $ausleihverwaltung->id, 0, $grades);
+    grade_update('mod/hardwarerental', $hardwarerental->course, 'mod', 'hardwarerental', $hardwarerental->id, 0, $grades);
 }
 
 /* File API */
@@ -410,14 +410,14 @@ function ausleihverwaltung_update_grades(stdClass $ausleihverwaltung, $userid = 
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function ausleihverwaltung_get_file_areas($course, $cm, $context) {
+function hardwarerental_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for ausleihverwaltung file areas
+ * File browsing support for hardwarerental file areas
  *
- * @package mod_ausleihverwaltung
+ * @package mod_hardwarerental
  * @category files
  *
  * @param file_browser $browser
@@ -431,25 +431,25 @@ function ausleihverwaltung_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function ausleihverwaltung_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function hardwarerental_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the ausleihverwaltung file areas
+ * Serves the files from the hardwarerental file areas
  *
- * @package mod_ausleihverwaltung
+ * @package mod_hardwarerental
  * @category files
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the ausleihverwaltung's context
+ * @param stdClass $context the hardwarerental's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function ausleihverwaltung_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function hardwarerental_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -464,28 +464,28 @@ function ausleihverwaltung_pluginfile($course, $cm, $context, $filearea, array $
 /* Navigation API */
 
 /**
- * Extends the global navigation tree by adding ausleihverwaltung nodes if there is a relevant content
+ * Extends the global navigation tree by adding hardwarerental nodes if there is a relevant content
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref An object representing the navigation tree node of the ausleihverwaltung module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the hardwarerental module instance
  * @param stdClass $course current course record
- * @param stdClass $module current ausleihverwaltung instance record
+ * @param stdClass $module current hardwarerental instance record
  * @param cm_info $cm course module information
  */
-function ausleihverwaltung_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
+function hardwarerental_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     // TODO Delete this function and its docblock, or implement it.
 }
 
 /**
- * Extends the settings navigation with the ausleihverwaltung settings
+ * Extends the settings navigation with the hardwarerental settings
  *
- * This function is called when the context for the page is a ausleihverwaltung module. This is not called by AJAX
+ * This function is called when the context for the page is a hardwarerental module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
  * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $ausleihverwaltungnode ausleihverwaltung administration node
+ * @param navigation_node $hardwarerentalnode hardwarerental administration node
  */
-function ausleihverwaltung_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $ausleihverwaltungnode=null) {
+function hardwarerental_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $hardwarerentalnode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }

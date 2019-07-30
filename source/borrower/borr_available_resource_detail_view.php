@@ -20,50 +20,63 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 // Replace ausleihantrag with the name of your module and remove this line.
 
-
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once(dirname(dirname(__FILE__)). '/lib.php');
 require_once(dirname(dirname(__FILE__)) . '/locallib.php');
 require_once(dirname(dirname(__FILE__))."/view_init.php");
 
-do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
+global $SESSION;
+
+$resourceid = optional_param('resourceid', 0, PARAM_INT);
+
+do_header('/mod/hardwarerental/borr_available_resource_detail_view.php');
 
 $strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-// Implement form for user
-require_once(dirname(__DIR__ ). '/forms/resourceDetailForm.php');
-$mform = new resource_detail_form();
+require_once(dirname(__DIR__ ). '/forms/stdnt_availableResourceForm.php');
+$mform = new stdntAvailableResourceForm();
 $mform->render();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-    redirect(new moodle_url('/mod/ausleihverwaltung/main_student_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('./borr_available_resource_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
-    redirect(new moodle_url('/mod/ausleihverwaltung/stdnt_extendrentalrequest_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('./borr_rentalapplication_view.php', array('id' => $cm->id, 'resourceid' => $fromform->resourceid)));
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
     // or on the first display of the form.
     // Set default data (if any)
     // Required for module not to crash as a course id is always needed
-    $formdata = array('id' => $id);
+
+    $resource = new stdClass();
+
+    //data_read: hardwarerental_resources
+    $resource = $DB->get_record('hardwarerental_resources',array('id'=>$resourceid));
+
+    /*foreach($SESSION->resourceList as $item) {
+        if ($resourceid == $item->id) {
+            $resource = $item;
+            break;
+        }
+    }*/
+
+    $formdata = array('id' => $id, 'resourceid' => $resourceid, 'ident' => $resource->id, 'name' => $resource->name, 'manufacturer' => $resource->manufacturer, 'category' => $resource->category, 'description' => $resource->description, 'quantity' => $resource->quantity, 'comment' => $resource->comment);
     $mform->set_data($formdata);
     //displays the form
     $mform->display();
 }
-$returnurl = new moodle_url('/mod/ausleihverwaltung/view.php', array('id' => $cm->id));
-echo $OUTPUT->single_button(new moodle_url($returnurl, array('id' => $cm->id)), 'Home');
+
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();
-
-

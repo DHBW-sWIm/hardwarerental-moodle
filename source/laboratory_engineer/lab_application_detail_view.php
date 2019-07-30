@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -88,8 +88,8 @@ if ($mform->is_cancelled()) {
 
     $pdf = new PDF();
     $pdf->BasicInfo($variables['stdnt_firstname']['value'], $variables['stdnt_lastname']['value'], $variables['stdnt_address']['value'], "", $variables['stdnt_city']['value'], $variables['stdnt_phone']['value'], $variables['stdnt_username']['value'], $variables['stdnt_course']['value'], $variables['stdnt_mail']['value']);
-    //data_read: hardware_rental_resources
-    $pdf->Resources($DB->get_record('hardware_rental_resources',array('id'=>$resourceid)));
+    //data_read: hardwarerental_resources
+    $pdf->Resources($DB->get_record('hardwarerental_resources',array('id'=>$resourceid)));
     $pdf->Signatures("");
 
     $pdfString = $pdf->Output("", "S");

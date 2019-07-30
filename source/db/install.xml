@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/ausleihverwaltung/db" VERSION="2018090900" COMMENT="XMLDB file for Moodle mod/ausleihverwaltung"
+<XMLDB PATH="mod/hardwarerental/db" VERSION="2018090900" COMMENT="XMLDB file for Moodle mod/hardwarerental"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
     <TABLES>
-        <TABLE NAME="ausleihverwaltung" COMMENT="Default comment for ausleihverwaltung, please edit me">
+        <TABLE NAME="hardwarerental" COMMENT="Default comment for hardwarerental, please edit me">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
-                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course ausleihverwaltung activity belongs to"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course hardwarerental activity belongs to"/>
                 <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-                <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the ausleihverwaltung activity"/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the hardwarerental activity"/>
                 <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"
                        COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
@@ -24,7 +24,7 @@
                 <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_users" COMMENT="Users in the hardware rental system">
+        <TABLE NAME="hardwarerental_users" COMMENT="Users in the hardware rental system">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="tenant" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Tenant of the user"/>
@@ -39,7 +39,7 @@
             </INDEXES>
         </TABLE>
 
-        <TABLE NAME="hardware_rental_resources" COMMENT="Hardware rental resources">
+        <TABLE NAME="hardwarerental_resources" COMMENT="Hardware rental resources">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="Required for technical reasons"/>
                 <FIELD NAME="tenant" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Tenant for multi-tenancy"/>
@@ -60,7 +60,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_tags" COMMENT="Hardware rental resources">
+        <TABLE NAME="hardwarerental_tags" COMMENT="Hardware rental resources">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="Required for technical reasons"/>
                 <FIELD NAME="name" TYPE="char" LENGTH="255"  NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Tag name"/>
@@ -72,7 +72,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_category" COMMENT="Users in the hardware rental system">
+        <TABLE NAME="hardwarerental_category" COMMENT="Users in the hardware rental system">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="PDF"/>
@@ -84,7 +84,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_manufacturer" COMMENT="Users in the hardware rental system">
+        <TABLE NAME="hardwarerental_manufacturer" COMMENT="Users in the hardware rental system">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="manufacturer" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="PDF"/>
@@ -96,7 +96,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_reservations" COMMENT="Reservations in the hardware rental system">
+        <TABLE NAME="hardwarerental_reservations" COMMENT="Reservations in the hardware rental system">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="user" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT=""/>
@@ -119,7 +119,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_ext_users" COMMENT="External users with no Moodle access">
+        <TABLE NAME="hardwarerental_ext_users" COMMENT="External users with no Moodle access">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="tenant" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT=""/>
@@ -136,7 +136,7 @@
                 <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
             </INDEXES>
         </TABLE>
-        <TABLE NAME="hardware_rental_pdf" COMMENT="Users in the hardware rental system">
+        <TABLE NAME="hardwarerental_pdf" COMMENT="Users in the hardware rental system">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="User id for technical reasons"/>
                 <FIELD NAME="pdf" TYPE="binary" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="PDF"/>

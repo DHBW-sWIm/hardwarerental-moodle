@@ -20,12 +20,13 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 // Replace ausleihantrag with the name of your module and remove this line.
+
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once(dirname(dirname(__FILE__)). '/lib.php');
@@ -34,30 +35,35 @@ require_once(dirname(dirname(__FILE__))."/view_init.php");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
-$strName = "Applications:";
+$strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-echo $OUTPUT->single_button(new moodle_url('./stdnt_available_resource_view.php', array('id' => $cm->id)), 'New Rental Application');
-
-echo '<br>';
-
-$table = new html_table();
-$table->head = array('Type', 'Resource', 'Status', 'Details');
-
-//data_read: hardware_rental_applications
-if(!isset($SESSION->applicationList)) $SESSION->applicationList = array();
-
-//data_read: hardware_rental_applications
-foreach ($SESSION->applicationList as $application){
-    $htmlLink = html_writer::link(new moodle_url('./stdnt_applicationdetail_view.php', array('id' => $cm->id, 'applicationid' => $application->id)), 'Details', $attributes=null);
-    $table->data[] = array($application->applicationtype, $application->resource, $application->status, $htmlLink);
+// Implement form for user
+require_once(dirname(__DIR__ ). '/forms/resourceDetailForm.php');
+$mform = new resource_detail_form();
+$mform->render();
+//Form processing and displaying is done here
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+    redirect(new moodle_url('/mod/hardwarerental/main_borrower_view.php', array('id' => $cm->id)));
+} else if ($fromform = $mform->get_data()) {
+    //Handle form successful operation, if button is present on form
+    redirect(new moodle_url('/mod/hardwarerental/borr_extendrentalrequest_view.php', array('id' => $cm->id)));
+} else {
+    // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+    // or on the first display of the form.
+    // Set default data (if any)
+    // Required for module not to crash as a course id is always needed
+    $formdata = array('id' => $id);
+    $mform->set_data($formdata);
+    //displays the form
+    $mform->display();
 }
-
-
-echo html_writer::table($table);
-
-echo $OUTPUT->single_button(new moodle_url('./main_student_view.php', array('id' => $cm->id)), 'Home');
+$returnurl = new moodle_url('/mod/hardwarerental/view.php', array('id' => $cm->id));
+echo $OUTPUT->single_button(new moodle_url($returnurl, array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();
+
+

@@ -14,18 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * The mod_ausleihverwaltung instance list viewed event.
+ * The mod_hardwarerental instance list viewed event.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace mod_ausleihverwaltung\event;
+namespace mod_hardwarerental\event;
 defined('MOODLE_INTERNAL') || die();
 /**
- * The mod_ausleihverwaltung instance list viewed event class.
+ * The mod_hardwarerental instance list viewed event class.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

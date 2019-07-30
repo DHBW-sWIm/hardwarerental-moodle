@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,7 +42,7 @@ echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-//data_read: hardware_rental_applications
+//data_read: hardwarerental_applications
 $unfilteredList = $SESSION->applicationList;
 $filteredList = array();
 foreach ($unfilteredList as $application){
@@ -52,14 +52,14 @@ foreach ($unfilteredList as $application){
     }
 }
 
-//data_read: hardware_rental_applications
+//data_read: hardwarerental_applications
 $SESSION->applicationList = $filteredList;
 
-redirect(new moodle_url('./stdnt_applicationlist_view.php', array('id' => $cm->id)));
+redirect(new moodle_url('./borr_applicationlist_view.php', array('id' => $cm->id)));
 
 echo '<hr>';
 
 
-echo $OUTPUT->single_button(new moodle_url('./main_student_view.php', array('id' => $cm->id)), 'Home');
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();

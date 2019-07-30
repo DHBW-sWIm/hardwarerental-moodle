@@ -16,30 +16,30 @@
 
 
 /**
- * English strings for ausleihverwaltung
+ * English strings for hardwarerental
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'ausleihverwaltung';
-$string['modulenameplural'] = 'ausleihverwaltungs';
-$string['modulename_help'] = 'Use the ausleihverwaltung module for... | The ausleihverwaltung module allows...';
-$string['ausleihverwaltung:addinstance'] = 'Add a new ausleihverwaltung';
-$string['ausleihverwaltung:submit'] = 'Submit ausleihverwaltung';
-$string['ausleihverwaltung:view'] = 'View ausleihverwaltung';
-$string['ausleihverwaltungfieldset'] = 'Custom example fieldset';
-$string['ausleihverwaltungname'] = 'ausleihverwaltung name';
-$string['ausleihverwaltungname_help'] = 'This is the content of the help tooltip associated with the ausleihverwaltungname field. Markdown syntax is supported.';
-$string['ausleihverwaltung'] = 'ausleihverwaltung';
-$string['pluginadministration'] = 'ausleihverwaltung administration';
-$string['pluginname'] = 'ausleihverwaltung';
+$string['modulename'] = 'hardwarerental';
+$string['modulenameplural'] = 'hardwarerentals';
+$string['modulename_help'] = 'Use the hardwarerental module for... | The hardwarerental module allows...';
+$string['hardwarerental:addinstance'] = 'Add a new hardwarerental';
+$string['hardwarerental:submit'] = 'Submit hardwarerental';
+$string['hardwarerental:view'] = 'View hardwarerental';
+$string['hardwarerentalfieldset'] = 'Custom example fieldset';
+$string['hardwarerentalname'] = 'hardwarerental name';
+$string['hardwarerentalname_help'] = 'This is the content of the help tooltip associated with the hardwarerentalname field. Markdown syntax is supported.';
+$string['hardwarerental'] = 'hardwarerental';
+$string['pluginadministration'] = 'hardwarerental administration';
+$string['pluginname'] = 'hardwarerental';
 $string['category'] ='category';
 $string['tag'] = 'Tag';
 $string['Stueckgut'] = 'Stueckgut';

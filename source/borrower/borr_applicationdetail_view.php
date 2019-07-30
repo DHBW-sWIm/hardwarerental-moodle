@@ -20,13 +20,12 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 // Replace ausleihantrag with the name of your module and remove this line.
-
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once(dirname(dirname(__FILE__)). '/lib.php');
@@ -37,45 +36,49 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 
-$strName = "Resource Details:";
+$applicationid = optional_param('applicationid', 0, PARAM_INT);
+
+$strName = "Application Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
 
-require_once(dirname(__DIR__ ). '/forms/stdnt_availableResourceBulkForm.php');
-$mform = new stdntAvailableResourceBulkForm();
+// Implement form for user
+require_once(dirname(__DIR__ ). '/forms/stdnt_ApplicationDetailForm.php');
+$mform = new stdntApplicationDetailForm();
 $mform->render();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-    redirect(new moodle_url('./stdnt_available_resource_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('./borr_applicationlist_view.php', array('id' => $cm->id)));
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
-    echo ('Form1: '.$fromform->name);
-    echo ('Form2: '.$fromform-resourceNname);
-    echo ('Global: '.$resourceName);
-    redirect(new moodle_url('./stdnt_rentalapplication_view.php', array('id' => $cm->id, 'resourceName' => $fromform->resourceName)));
+    redirect(new moodle_url('./borr_confirmcancel_view.php', array('id' => $cm->id, 'applicationid' => $fromform->applicationid)));
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
     // or on the first display of the form.
     // Set default data (if any)
     // Required for module not to crash as a course id is always needed
 
-    $resource = new stdClass();
-    //data_read: hardware_rental_resources
-    foreach($SESSION->resourceList as $item) {
-        if ($resourceName == $item->name) {
-            $resource = $item;
+    $application = new stdClass();
+    //data_read: hardwarerental_applications
+    foreach($SESSION->applicationList as $item) {
+        if ($applicationid == $item->id) {
+            $application = $item;
             break;
         }
     }
 
-    $formdata = array('id' => $id, 'resourceName' => $resourceName,'name' => $resource->name, 'type' => $resource->type, 'category' => $resource->category, 'description' => $resource->description, 'status' => $resource->status, 'quantity' => $resource->quantity, 'comment' => $resource->comment);
+    $date = $application->returndate;
+    $date = date('d.m.y',$date);
+
+
+    $formdata = array('id' => $id, 'applicationid' => $applicationid, 'type' => $application->applicationtype, 'name' => $application->student_name, 'status' => $application->status, 'resource' => $application->resource, 'date' => $date, 'assignee' => $application->assignee, 'grund' => $application->grund);
     $mform->set_data($formdata);
     //displays the form
     $mform->display();
 }
 
-echo $OUTPUT->single_button(new moodle_url('./main_student_view.php', array('id' => $cm->id)), 'Home');
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();

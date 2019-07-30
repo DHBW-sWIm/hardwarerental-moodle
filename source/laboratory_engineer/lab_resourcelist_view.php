@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,28 +39,28 @@ do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
 global $SESSION;
 
-echo $OUTPUT->heading(get_string('lab_resourcelist_title','ausleihverwaltung'));
+echo $OUTPUT->heading(get_string('lab_resourcelist_title','hardwarerental'));
 echo '<br>';
 
 echo $OUTPUT->single_button(
     new moodle_url('./lab_new_resource_view.php', array('id'=>$cm->id)),
-    get_string('lab_resourcelist_new_resource_button','ausleihverwaltung')
+    get_string('lab_resourcelist_new_resource_button','hardwarerental')
 );
 
 echo '<br>';
 
 $table = new html_table();
 $table->head = array(
-    get_string('resource_id','ausleihverwaltung'),
-    get_string('resource_name','ausleihverwaltung'),
-    get_string('resource_description','ausleihverwaltung'),
-    get_string('resource_comment','ausleihverwaltung'),
-    get_string('resource_quantity','ausleihverwaltung'),
-    get_string('lab_resourcelist_resource_details','ausleihverwaltung')
+    get_string('resource_id','hardwarerental'),
+    get_string('resource_name','hardwarerental'),
+    get_string('resource_description','hardwarerental'),
+    get_string('resource_comment','hardwarerental'),
+    get_string('resource_quantity','hardwarerental'),
+    get_string('lab_resourcelist_resource_details','hardwarerental')
 );
 
-//data_read: hardware_rental_resources
-$resources = $DB->get_records('hardware_rental_resources',array('tenant'=>$cm->id));
+//data_read: hardwarerental_resources
+$resources = $DB->get_records('hardwarerental_resources',array('tenant'=>$cm->id));
 
 foreach ($resources as $resource){
     $htmlLink = html_writer::link(new moodle_url('./lab_resourcedetail_view.php', array('id'=>$cm->id, 'resourceid' => $resource->id)), 'Details', $attributes=null);

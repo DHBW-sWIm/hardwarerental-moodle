@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ require_once(dirname(dirname(__FILE__))."/view_init.php");
 
 global $SESSION;
 
-do_header('/mod/ausleihverwaltung/stdnt_available_resource_view.php');
+do_header('/mod/hardwarerental/borr_available_resource_view.php');
 
 // Output starts here.
 /*echo $OUTPUT->header();
@@ -53,7 +53,7 @@ if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
 } else if ($fromform = $mform->get_data()) {
     //Handle form successful operation, if button is present on form
-    redirect(new moodle_url('./stdnt_available_resource_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('./borr_available_resource_view.php', array('id' => $cm->id)));
 } else {
     // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
     // or on the first display of the form.
@@ -74,24 +74,24 @@ $table->head = array('ID', 'Name', 'Description', 'Quantity', 'Select');
 /*foreach($SESSION->resourceList as $resource) {
     if ('Available' == $resource->status || 'Requested' == $resource->status) {
         if($resource->resourcetype == 'Bulk Material'){
-            $htmlLink = html_writer::link(new moodle_url('./stdnt_available_resourceBulk_detail_view.php', array('id' => $cm->id, 'resourceName' => $resource->name)), 'Select', $attributes=null);
+            $htmlLink = html_writer::link(new moodle_url('./borr_available_resourceBulk_detail_view.php', array('id' => $cm->id, 'resourceName' => $resource->name)), 'Select', $attributes=null);
 
         } else {
-            $htmlLink = html_writer::link(new moodle_url('./stdnt_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
+            $htmlLink = html_writer::link(new moodle_url('./borr_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
         }
         $table->data[] = array($resource->name, $resource->description, $resource->status, $resource->quantity, $htmlLink);
     }
 }*/
-//data_read: hardware_rental_resources
-$resources = $DB->get_records('hardware_rental_resources',array('tenant'=>$cm->id));
+//data_read: hardwarerental_resources
+$resources = $DB->get_records('hardwarerental_resources',array('tenant'=>$cm->id));
 
 foreach ($resources as $resource){
-    $htmlLink = html_writer::link(new moodle_url('./stdnt_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
+    $htmlLink = html_writer::link(new moodle_url('./borr_available_resource_detail_view.php', array('id' => $cm->id, 'resourceid' => $resource->id)), 'Select', $attributes = null);
     $table->data[] = array($resource->id, $resource->name, $resource->description, $resource->quantity, $htmlLink);
 }
 
 echo html_writer::table($table);
 
-echo $OUTPUT->single_button(new moodle_url('./main_student_view.php', array('id' => $cm->id)), 'Home');
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
 
 echo $OUTPUT->footer();

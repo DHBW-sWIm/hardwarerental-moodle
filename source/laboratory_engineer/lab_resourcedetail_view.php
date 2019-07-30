@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,8 +42,8 @@ $strName = "Resource Details:";
 echo $OUTPUT->heading($strName);
 
 echo '<br>';
-//data_read: hardware_rental_resources
-$resource = $DB->get_record('hardware_rental_resources',array('id'=>$resourceid));
+//data_read: hardwarerental_resources
+$resource = $DB->get_record('hardwarerental_resources',array('id'=>$resourceid));
 
 // Implement form for user
 require_once(dirname(__DIR__ ) . '/forms/lab_ResourceDetailForm.php');
@@ -68,13 +68,13 @@ if ($mform->is_cancelled()) {
         'resourceid' => $resourceid,
         'serial' => ''.$resource->serial,
         'name' => $resource->name,
-        //data_read: hardware_rental_manufacturer
+        //data_read: hardwarerental_manufacturer
         'manufacturer' => $DB->get_record(
-            'hardware_rental_manufacturer',array('id'=>$resource->manufacturer)
+            'hardwarerental_manufacturer',array('id'=>$resource->manufacturer)
         )->manufacturer,
-        //data_read: hardware_rental_manufacturer
+        //data_read: hardwarerental_manufacturer
         'category' => $DB->get_record(
-            'hardware_rental_category',array('id'=>$resource->category)
+            'hardwarerental_category',array('id'=>$resource->category)
         )->category,
         'description' => $resource->description,
         'quantity' => ''.$resource->quantity,

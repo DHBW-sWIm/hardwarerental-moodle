@@ -13,17 +13,20 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Prints a particular instance of checkdeadline
+ * Prints a particular instance of ausleihantrag
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-// Replace checkdeadline with the name of your module and remove this line.
+
+// Replace ausleihantrag with the name of your module and remove this line.
+
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once(dirname(dirname(__FILE__)). '/lib.php');
 require_once(dirname(dirname(__FILE__)) . '/locallib.php');
@@ -31,17 +34,30 @@ require_once(dirname(dirname(__FILE__))."/view_init.php");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
-$strName = "My Resources:";
-echo $OUTPUT->heading($strName);
-echo $OUTPUT->single_button(new moodle_url('./stdnt_resource_view.php', array('id' => $cm->id)), 'Show Resources');
-echo '<br>';
-echo '<br>';
-
 $strName = "Applications:";
 echo $OUTPUT->heading($strName);
-echo $OUTPUT->single_button(new moodle_url('./stdnt_applicationlist_view.php', array('id' => $cm->id)), 'My Applications');
-echo '<br>';
+
 echo '<br>';
 
-// Finish the page.
+echo $OUTPUT->single_button(new moodle_url('./borr_available_resource_view.php', array('id' => $cm->id)), 'New Rental Application');
+
+echo '<br>';
+
+$table = new html_table();
+$table->head = array('Type', 'Resource', 'Status', 'Details');
+
+//data_read: hardwarerental_applications
+if(!isset($SESSION->applicationList)) $SESSION->applicationList = array();
+
+//data_read: hardwarerental_applications
+foreach ($SESSION->applicationList as $application){
+    $htmlLink = html_writer::link(new moodle_url('./borr_applicationdetail_view.php', array('id' => $cm->id, 'applicationid' => $application->id)), 'Details', $attributes=null);
+    $table->data[] = array($application->applicationtype, $application->resource, $application->status, $htmlLink);
+}
+
+
+echo html_writer::table($table);
+
+echo $OUTPUT->single_button(new moodle_url('./main_borrower_view.php', array('id' => $cm->id)), 'Home');
+
 echo $OUTPUT->footer();

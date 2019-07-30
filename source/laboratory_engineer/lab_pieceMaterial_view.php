@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_hardwarerental
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,8 +51,8 @@ if($SESSION->formData1->resourcetype == 1){
         "",
         implode(";",$SESSION->formData1->tags)
     );
-    //data_write: hardware_rental_resources
-    $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
+    //data_write: hardwarerental_resources
+    $lastinsertid = $DB->insert_record('hardwarerental_resources', $record, false);
     redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 }else {
     do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
@@ -87,8 +87,8 @@ if($SESSION->formData1->resourcetype == 1){
                 $fromform->$inventory_nr_prop,
                 implode(";", $SESSION->formData1->tags)
             );
-            //data_write: hardware_rental_resources
-            $lastinsertid = $DB->insert_record('hardware_rental_resources', $record, false);
+            //data_write: hardwarerental_resources
+            $lastinsertid = $DB->insert_record('hardwarerental_resources', $record, false);
         }
         redirect(new moodle_url('./lab_resourcelist_view.php', array('id' => $cm->id)));
 

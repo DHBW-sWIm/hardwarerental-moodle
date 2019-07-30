@@ -24,36 +24,24 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 // Replace checkdeadline with the name of your module and remove this line.
-require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(__FILE__).'/lib.php');
-require_once(dirname(__FILE__).'/locallib.php');
-require_once(dirname(__FILE__)."/view_init.php");
+require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+require_once(dirname(dirname(__FILE__)). '/lib.php');
+require_once(dirname(dirname(__FILE__)) . '/locallib.php');
+require_once(dirname(dirname(__FILE__))."/view_init.php");
 
 do_header(substr(__FILE__, strpos(__FILE__,'/mod')));
 
-global $SESSION;
-global $USER;
-
-$strName = "Login as borrower:";
+$strName = "My Resources:";
 echo $OUTPUT->heading($strName);
-echo $OUTPUT->single_button(new moodle_url('./borrower/main_borrower_view.php', array('id' => $cm->id)), 'Login');
+echo $OUTPUT->single_button(new moodle_url('./borr_resource_view.php', array('id' => $cm->id)), 'Show Resources');
 echo '<br>';
 echo '<br>';
 
-if(isset($usergroup[AUTH_LABORATORY_ENGINEER]) || isset($usergroup[AUTH_DHBW_AUTHORITY])){
-    $strName = "Login as DHBW-authority:";
-    echo $OUTPUT->heading($strName);
-    echo $OUTPUT->single_button(new moodle_url('./laboratory_engineer/main_lab_view.php', array('id' => $cm->id)), 'Login');
-    echo '<br>';
-    echo '<br>';
-
-    /*$strName = "Generate PDF";
-    echo $OUTPUT->heading($strName);
-    echo $OUTPUT->single_button(new moodle_url('./pdf_generate.php', array('id' => $cm->id)), 'Generate');
-    echo '<br>';
-    echo '<br>';*/
-}
-
+$strName = "Applications:";
+echo $OUTPUT->heading($strName);
+echo $OUTPUT->single_button(new moodle_url('./borr_applicationlist_view.php', array('id' => $cm->id)), 'My Applications');
+echo '<br>';
+echo '<br>';
 
 // Finish the page.
 echo $OUTPUT->footer();
